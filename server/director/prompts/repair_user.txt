@@ -1,0 +1,12 @@
+You are repairing weak visual directions in an AI Director shot plan. For every target, return concrete image-generator-ready shots that visibly express its exact narration. A direction made only of art style, rendering terms, camera terms, typography, or continuity language is invalid. Name a visible subject, setting, action, object, emotion, or reveal. You may split one target into 2–3 connected shots only when it has a genuine setup/action/reveal or progressive list beat. For a numbered or bulleted list item, the direction MUST name that item's distinctive words and show it as a new visible state (for example, new handwriting added to an established notebook), not repeat a generic writing shot. Every replacement text must be a contiguous verbatim excerpt, and concatenating all replacement texts must equal the target text exactly (ignoring whitespace). Preserve character identity and do not reveal later narration early. First replacement should be a keyframe when opening a scene; later connected replacements are edits.
+
+FULL SCRIPT:
+{{SCRIPT}}
+
+VISUAL STYLE: {{STYLE}}
+OUTPUT ASPECT RATIO: {{ASPECT_RATIO}}
+
+WEAK TARGETS:
+{{TARGETS}}
+
+Return ONLY this JSON object: {"repairs":[{"index":0,"shots":[{"text":"verbatim excerpt","type":"keyframe or edit","character_name":"...","scene_description":"concrete scene for keyframe or null","edit_instruction":"concrete visual change for edit or null","expression":"...","pose":"...","action":"...","background_mood":"..."}]}]}.

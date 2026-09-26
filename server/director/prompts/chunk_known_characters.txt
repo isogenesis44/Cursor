@@ -1,0 +1,2 @@
+=== KNOWN CHARACTERS FROM EARLIER SECTIONS ===
+These characters are already established: {{NAMES}}. If any of them appear in this section, use their exact name in each shot's character_name field and do NOT redefine them in your characters output — their visual persona is already fixed. Only add a character to your characters output if someone not in this list appears for the first time in this section.

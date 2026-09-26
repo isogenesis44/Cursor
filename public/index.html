@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Director Lite</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <h1>🎬 AI Director Lite</h1>
+    <div class="projects">
+      <select id="projectSelect"></select>
+      <button id="newProject">New video</button>
+      <button id="deleteProject" class="ghost danger" title="Delete this project">Delete</button>
+    </div>
+  </header>
+  <div id="tokenWarning" class="banner hidden">
+    <b>REPLICATE_API_TOKEN is not set.</b> Add it to <code>.env</code> and restart the server. Planning and Whisper need it; everything else works without it.
+  </div>
+
+  <main id="app" class="hidden">
+    <nav class="steps">
+      <a href="#s1">1 · Script</a><a href="#s2">2 · Shot plan &amp; ChatGPT</a><a href="#s3">3 · Images</a><a href="#s4">4 · Audio sync</a><a href="#s5">5 · Render</a>
+    </nav>
+
+    <!-- 1. Script -->
+    <section id="s1" class="card">
+      <h2>1 · Script &amp; style</h2>
+      <div class="grid2">
+        <label>Video title<input id="title" /></label>
+        <label>Aspect ratio
+          <select id="aspectRatio"><option>16:9</option><option>9:16</option><option>1:1</option><option>4:5</option><option>4:3</option></select>
+        </label>
+      </div>
+      <label>Script (paste the whole narration — it's split into ~400-word sections automatically)
+        <textarea id="script" rows="12" placeholder="Paste your script here…"></textarea>
+      </label>
+      <div class="muted small"><span id="wordCount">0</span> words</div>
+      <div class="grid2">
+        <label>Visual style (text)
+          <input id="style" placeholder="e.g. black-and-white stick figure, clean lines, flat white background" />
+        </label>
+        <div>
+          <div class="label">Style reference image (overrides the text style)</div>
+          <div class="styleRef">
+            <img id="styleImg" class="hidden" alt="style reference" />
+            <input type="file" id="styleFile" accept="image/png,image/jpeg,image/webp" />
+            <button id="removeStyle" class="ghost hidden">Remove</button>
+          </div>
+        </div>
+      </div>
+      <details>
+        <summary>Director model settings</summary>
+        <div class="grid3">
+          <label>Replicate model<input id="model" /></label>
+          <label>Reasoning effort
+            <select id="reasoningEffort"><option>none</option><option>low</option><option>medium</option><option>high</option><option>xhigh</option></select>
+          </label>
+          <label>Max completion tokens<input id="maxTokens" type="number" min="2000" step="1000" /></label>
+          <label>Words per planning section<input id="chunkWords" type="number" min="100" step="50" /></label>
+        </div>
+      </details>
+      <div class="actions">
+        <button id="planBtn" class="primary">🎬 Direct this script</button>
+        <label class="button ghost">Import existing plan JSON<input type="file" id="importPlan" accept=".json,application/json" hidden /></label>
+      </div>
+      <div id="planJob" class="job hidden"></div>
+    </section>
+
+    <!-- 2. Plan + export -->
+    <section id="s2" class="card">
+      <h2>2 · Shot plan → ChatGPT image job</h2>
+      <p id="planEmpty" class="muted">No plan yet. Direct the script in step 1.</p>
+      <div id="planBody" class="hidden">
+        <div class="stats" id="planStats"></div>
+        <div class="exportBox">
+          <div class="grid3">
+            <label>Images per scheduled run<input id="imagesPerRun" type="number" min="1" /></label>
+            <label>Google Drive folder ChatGPT saves to<input id="driveFolder" placeholder="AI Director/My video" /></label>
+          </div>
+          <div class="actions">
+            <a id="dlJob" class="button primary" download>⬇ Download ChatGPT job JSON (all images)</a>
+            <button id="copyInstructions">📋 Copy ChatGPT instructions</button>
+            <a id="dlPlan" class="button ghost" download>⬇ Raw shot plan JSON</a>
+          </div>
+          <div id="runs" class="runs"></div>
+          <details class="howto">
+            <summary>How to use this in ChatGPT</summary>
+            <ol>
+              <li>Download the job JSON (or one file per run if the whole file is too big to attach).</li>
+              <li>In ChatGPT, start a new chat, attach the JSON <b>and your style reference image</b>, and paste the copied instructions.</li>
+              <li>ChatGPT first replies with the image count and the run plan — no images yet.</li>
+              <li>Turn it into a scheduled task (e.g. daily at 3am): "Continue the image job: do the next run".</li>
+              <li>Make sure the Google Drive connector is on, so each image is saved as <code>shot_0001.png</code>, <code>shot_0002.png</code>… in the folder above.</li>
+              <li>When done, download the Drive folder (it comes as a .zip) and drop it into step 3.</li>
+            </ol>
+          </details>
+        </div>
+        <details id="charsBox">
+          <summary>Character bible (<span id="charCount">0</span>)</summary>
+          <div id="characters" class="chars"></div>
+        </details>
+        <div class="tableWrap">
+          <table class="shots">
+            <thead><tr><th>#</th><th>Type</th><th>Narration</th><th>Direction (editable)</th><th>Image</th></tr></thead>
+            <tbody id="shotRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Images -->
+    <section id="s3" class="card">
+      <h2>3 · Upload the generated images</h2>
+      <p class="muted">Drop up to 500 images or the Google Drive .zip. Files named <code>shot_0001.png</code> (or <code>1.png</code>, <code>image 1.png</code>) go to that shot; anything else fills the empty shots oldest-first.</p>
+      <div id="drop" class="drop">
+        <b>Drop images / .zip here</b> or <label class="link">browse<input type="file" id="imageFiles" multiple accept="image/png,image/jpeg,image/webp,.zip" hidden /></label>
+      </div>
+      <div id="uploadJob" class="job hidden"></div>
+      <div class="stats" id="imageStats"></div>
+      <div class="actions"><button id="clearImages" class="ghost danger">Remove all images</button></div>
+      <div id="imageGrid" class="imageGrid"></div>
+    </section>
+
+    <!-- 4. Audio -->
+    <section id="s4" class="card">
+      <h2>4 · Narration audio + Whisper sync</h2>
+      <div class="grid2">
+        <div>
+          <div class="label">Narration audio</div>
+          <input type="file" id="audioFile" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.flac" />
+          <div id="audioInfo" class="muted small"></div>
+          <audio id="audioPlayer" controls class="hidden"></audio>
+        </div>
+        <div class="grid2">
+          <label>Whisper engine
+            <select id="whisperEngine">
+              <option value="whisperx">WhisperX (word-accurate, recommended)</option>
+              <option value="fast">Incredibly-fast-whisper (word timestamps)</option>
+              <option value="openai">OpenAI Whisper (segment timing only)</option>
+            </select>
+          </label>
+          <label>Language code<input id="language" placeholder="en" /></label>
+          <label>Cut lead (seconds before the word)<input id="leadSeconds" type="number" step="0.01" min="0" max="0.5" /></label>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="transcribeBtn" class="primary">🎙 Transcribe &amp; sync</button>
+        <button id="resyncBtn">↻ Re-sync (after editing settings)</button>
+        <label class="button ghost">Import Whisper JSON<input type="file" id="importTranscript" accept=".json,application/json" hidden /></label>
+      </div>
+      <div id="transcribeJob" class="job hidden"></div>
+      <div id="syncStats" class="stats"></div>
+      <div id="timelineBar" class="timelineBar"></div>
+      <div id="preview" class="preview hidden">
+        <div class="previewFrame"><img id="previewImg" alt="" /><div id="previewCaption" class="caption"></div></div>
+        <div class="muted small">Preview: play the audio above — the image swaps on the synced timestamps.</div>
+      </div>
+    </section>
+
+    <!-- 5. Render -->
+    <section id="s5" class="card">
+      <h2>5 · Render the video (Remotion)</h2>
+      <div class="grid3">
+        <label>FPS<select id="fps"><option>24</option><option>25</option><option>30</option><option>60</option></select></label>
+        <label>Motion
+          <select id="motion"><option value="kenburns">Subtle camera move (Ken Burns)</option><option value="none">Static images</option></select>
+        </label>
+        <label>Transition
+          <select id="transition"><option value="cut">Hard cut (exact sync)</option><option value="fade">Quick dissolve</option></select>
+        </label>
+        <label>Dissolve length (frames)<input id="transitionFrames" type="number" min="1" max="15" /></label>
+      </div>
+      <div class="actions"><button id="renderBtn" class="primary">🎞 Render MP4</button></div>
+      <div id="renderJob" class="job hidden"></div>
+      <div id="renders"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

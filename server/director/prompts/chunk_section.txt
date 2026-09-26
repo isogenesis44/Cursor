@@ -1,0 +1,2 @@
+=== SCRIPT SECTION {{NUMBER}} OF {{TOTAL}} ===
+This script was split into sequential sections for planning. The SCRIPT text above is ONLY this section — cover every word of it in order with no gaps or overlap, and do not invent or reference content from other sections.

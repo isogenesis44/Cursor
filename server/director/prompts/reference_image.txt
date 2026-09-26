@@ -1,0 +1,12 @@
+=== REFERENCE IMAGE — SOLE STYLE AUTHORITY ===
+A reference image has been provided. It OVERRIDES the selected Visual Style entirely.
+Before planning anything else:
+1. Examine the reference image and extract: art style (e.g. stick figure, watercolor,
+   anime, photorealistic), color palette, line quality, rendering technique.
+2. Use THAT extracted style — NOT the 'Visual Style' value below — as the art_style
+   for ALL characters' visual_persona and every scene_description / edit_instruction.
+3. Treat every source-specific detail as OFF-LIMITS content: do NOT copy or reuse the
+   reference image's people, scene, pose, camera composition, video frame, captions,
+   timestamps, subtitles, watermarks, platform UI, logos, layout, or readable words.
+4. The 'Visual Style' value below is informational only; ignore it when writing prompts.
+The reference supplies a visual language only, never a storyboard or a source frame.

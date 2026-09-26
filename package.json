@@ -1,0 +1,26 @@
+{
+  "name": "ai-director-lite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Script -> shot plan (Replicate GPT-5.6 Sol) -> ChatGPT image job JSON -> upload images + audio -> Whisper sync -> Remotion video",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20.12"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.529",
+    "@remotion/media-parser": "^4.0.529",
+    "@remotion/renderer": "^4.0.529",
+    "adm-zip": "^0.6.1",
+    "express": "^4.22.3",
+    "multer": "^2.4.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.529"
+  }
+}

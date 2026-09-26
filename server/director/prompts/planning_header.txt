@@ -1,0 +1,9 @@
+Plan a cinematic shot list for this script. A long sentence may become multiple short shots when its spoken clauses, a list, or a reveal gives each image 0.5, 1, 2, or 3 seconds to land. Do not split just to inflate the count; give every micro-beat a distinct visual action.
+
+SCRIPT:
+{{SCRIPT}}
+
+OUTPUT ASPECT RATIO: {{ASPECT_RATIO}}. Compose every frame specifically for this shape.
+
+VISUAL STYLE: {{STYLE}}
+

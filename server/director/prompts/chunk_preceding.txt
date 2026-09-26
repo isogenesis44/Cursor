@@ -1,0 +1,3 @@
+=== END OF THE PRECEDING SECTION (already planned — do not re-plan this) ===
+{{PRECEDING}}
+Use this only to keep the story, setting, and camera continuous. Decide whether your first shot in this section continues that same scene (an edit) or opens a new one (a keyframe), exactly as you would for any other scene transition.

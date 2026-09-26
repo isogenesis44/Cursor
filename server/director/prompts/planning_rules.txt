@@ -1,0 +1,295 @@
+=== STEP 1: CHARACTER BIBLE (complete this BEFORE planning shots) ===
+Read the entire script and identify every character who speaks, is named, or appears.
+For each character, create a visual persona derived from their psychological role:
+  art_style           — visual rendering: 'stick figure', 'anime', 'watercolor', etc.
+  physical_description — body type, height, posture (e.g. 'tall with slight forward hunch')
+  facial_features     — eye shape, expression tendency, distinctive marks
+  color_palette       — a DEFAULT wardrobe/colour reference only (e.g. 'dark grey lines, red accent'), used when a scene has no reason to differ
+  distinctive_elements — props or accessories they always carry
+  expression_type     — default emotional register (e.g. 'deceptively warm', 'coldly confident')
+
+IDENTITY VS. VARIABLE LOOK — only three traits are permanently fixed for a character: art_style, physical_description (body build/height/posture), and facial_features. These are what make the audience recognize the same character in shot 3 and shot 30. Everything else — wardrobe, colour palette, and the immediate setting/location — is free to change scene to scene, the way a real film changes a character's clothes, room, and lighting as the story moves. color_palette is only a DEFAULT reference for a scene that has no reason to differ from it; it is not a locked requirement, and a scene's location is never limited to matching the character's usual look. Do not invent named 'looks' or persona variants — simply plan each scene's wardrobe, colours, and setting from what that specific story moment calls for.
+A keyframe sets that scene's own wardrobe via the 'wardrobe_override' field — see TECHNIQUE C and TECHNIQUE D below — any time the activity, setting, time of day, or simply a new scene calls for a different outfit than the default (e.g. nightwear for a late scene, athletic wear for exercise, a new outfit after a time skip, weather- or venue-appropriate clothing for a new location). Bias toward setting a fresh wardrobe_override rather than leaving it null — treat repeating the exact default look as the exception that needs a reason (the same short scene, minutes later, nothing about the setting changed), not the default choice.
+WARDROBE VARIETY — a real change, not a repaint: when you do set wardrobe_override, it must read as a genuinely different outfit, not the same core colors in a different cut. Naming a different garment while keeping the character's signature colors (e.g. still describing green-and-orange tones for every override) is NOT a real change — pick a different color family and style suited to the specific scene (sleepwear in soft neutrals, an outdoor outfit in weather-appropriate tones, a special-occasion outfit that looks nothing like the everyday default). The same logic applies to the scene's setting, props, and lighting mood in scene_description: choose whatever location and colour grading the story beat actually calls for, not whatever the character has worn or stood in before.
+
+CHARACTER PERSONA INJECTION — CRITICAL:
+Only for a shot where a character is actually visible, include that character's fixed identity anchor (art style, physical build, facial features) in the prompt — this is what keeps them recognizable while wardrobe, colour, and setting move freely with the story. Do NOT force a character into a shot whose real subject is a room, object, detail, business, group, title card, process, or consequence.
+  Keyframe → scene_description: '[ART_STYLE], [PHYSICAL], [FACE] — [scene + camera + mood], wearing [this scene's wardrobe]'
+  Edit     → edit_instruction:  '[ART_STYLE], [KEY_FACE_DETAIL] — [camera move] — [visual change]'
+This forces the same character to look identical whenever they are shown — even though their clothes, surroundings, and colour mood can be completely different. A character may be entirely off-screen when the narration is about something else.
+
+Persona injection example:
+  Character 'Manipulator': art_style=stick figure, physical=tall slight hunch, face=narrow eyes half-smile, color_palette (default)=dark grey lines red accent, props=coffee cup
+  Keyframe, wardrobe_override=null (this scene matches the default look): scene_description = 'STICK FIGURE, tall slight hunch, narrow eyes half-smile, dark grey lines, red accent — seated at desk holding coffee cup, medium shot, morning light, [STYLE OR REFERENCE IMAGE STYLE]'
+  Keyframe, wardrobe_override='faded denim jacket, warm mustard tones' (a different day, a different place): scene_description = 'STICK FIGURE, tall slight hunch, narrow eyes half-smile — wearing faded denim jacket, warm mustard tones instead of the usual outfit — walking through an open market stall, wide shot, bright afternoon light, [STYLE OR REFERENCE IMAGE STYLE]'
+  Edit: edit_instruction = 'STICK FIGURE, narrow eyes widening — cut to close-up, coffee cup set down, slight forward lean'
+
+=== VISUAL INTENT, SUBJECT, AND COMPOSITION CONTROL ===
+Direct the meaning of each beat from the context of the whole scene. Do not mechanically turn each word into an isolated prop or action. First decide what the audience should LOOK AT for this exact line: a character, an environment, an object/detail, a group, a business/place of work, an on-screen idea, or the visible consequence of an event. The character is NOT the default subject. Show them only when their action, reaction, or presence is the most meaningful visual for that narration.
+Use an environment-only shot when the line is about a room or location; use an object/detail insert when it is about a specific thing; use a group composition when it is about a family/team/community; and use an establishing or process/result shot when it is about a business or event. Preserve the physical relationship the narration implies: if a character notices an old note on a wall, stage a note visibly attached to the wall for the character to notice; do not invent a hand-off unless the story establishes one.
+Examples: 'Now imagine that exact kitchen' = a deliberate environmental view of the kitchen, no character required. 'Same wobbly table, same handwriting' = a detail shot of the table and writing, not a person at the table. 'One member of your family is worth twelve billion dollars' = a group shot of three or four family members, with the wealth figure clearly associated with one member. 'Nothing about the room changed' = a room-focused composition. 'Let me start with the moment everything shifts' = a transition, visual hook, or story-state setup rather than an automatic character portrait. 'A business finally breaking through' = show the breakthrough itself — the business, its activity, team, product, customers, result, or setting — rather than defaulting to a single character.
+For a phrase such as 'the screen fades to black', decide what serves the current story: an in-world display can darken while the scene remains visible, a cinematic transition can move the viewer to the next moment, or a deliberate title-card beat can fill the frame. Never default to a featureless black canvas merely because the word 'black' appears.
+When an edit continues a scene, treat the preceding image as the continuity source — preserve the same character identity, wardrobe, environment, props, lighting logic, and story state unless the narration changes them. This does NOT lock the camera composition. Every shot still needs its own purposeful view: use a hard cut to an independent camera angle, a reverse, an over-the-shoulder, a reaction, an insert, or a new staging position whenever that tells the next beat more clearly. Keep the same world coherent across the cut; do not merely repeat the same shot and call a zoom a new beat. When readable writeup must remain visible, preserve its exact alignment, safe-area position, scale, and baseline unless the narration explicitly calls for a text movement or replacement.
+All readable on-screen writeup or title text must use Comic Sans MS. During a continuing writeup/title sequence, retain the exact text alignment, safe-area position, scale, and baseline from the establishing keyframe unless the narration explicitly calls for a text movement or replacement.
+
+=== TECHNIQUE EXAMPLES (study these before planning) ===
+
+EXAMPLE A1 — Progressive reveal (elements introduced across connected narration beats)
+(Script excerpt: 'He laid out each trap. Excitement. Then interest. Then urgency. No.')
+  Shot 22 keyframe, text='He laid out each trap.':
+    scene_description = 'STICK FIGURE, tall slight hunch, narrow eyes, dark grey lines — standing at whiteboard, arms open, no elements yet, medium wide shot, cool light'
+  Shot 23 edit, text='Excitement.':
+    edit_instruction = 'STICK FIGURE, narrow eyes — keep figure at board — introduce GIFT/EXCITEMENT icon (heart with exclamation) floating left of figure, wide shot'
+  Shot 24 edit, text='Then interest.':
+    edit_instruction = 'STICK FIGURE, narrow eyes — keep figure + excitement icon — introduce GIFT/INTEREST icon (star) appearing to its right, medium shot'
+  Shot 25 edit, text='Then urgency.':
+    edit_instruction = 'STICK FIGURE, narrow eyes — keep figure + excitement + interest icons — introduce GIFT/URGENCY icon (alarm bell) with urgency glow, close-up framing'
+  Shot 26 edit, text='No.':
+    edit_instruction = 'STICK FIGURE, narrow eyes — keep all 3 icons — large NO speech bubble appears above figure, extreme wide pull-back'
+  Why progressive: each stage gets its own visual beat — the pacing wants the audience to watch the trap accumulate piece by piece.
+
+EXAMPLE A2 — Single consolidated shot (elements named together, or impact over build-up)
+(Script excerpt: 'Concern, memory, kindness, boundaries — every one became a weapon against you.')
+  Shot 51 keyframe, text='Concern, memory, kindness, boundaries — every one became a weapon against you.':
+    scene_description = 'STICK FIGURE, average height, slim frame, gradually curling inward, dark grey lines — seated at table, arrows pointing in from CONCERN (hand icon), MEMORY (brain icon), KINDNESS (smile icon), and BOUNDARIES (shield icon) all visible together converging on the figure, wide shot, oppressive mood'
+  Why consolidated: the sentence names all four elements in one breath as a summary — the impact comes from seeing them converge at once, not from a slow reveal.
+
+EXAMPLE B — Zoom cut
+(Script excerpt: '... he had total control. Calm. Certain.')
+  Shot 26 keyframe, text='... he had total control.':
+    scene_description = 'STICK FIGURE, tall slight hunch, narrow eyes half-smile, dark grey, red accent — standing centre frame, arms loosely at sides, medium shot, dim cool light'
+  Shot 27 edit, text='Calm.':
+    edit_instruction = 'STICK FIGURE, narrow eyes half-smile — push in — extreme close-up of manipulator face — same cold half-smile, heightened stillness'
+  Shot 28 edit, text='Certain.':
+    edit_instruction = 'STICK FIGURE, narrowed eyes — push in further — reaction close-up, one eyebrow fractionally raised, absolute stillness, held frame'
+
+=== STEP 2: SHOT PLANNING — INTELLIGENT MICRO-BEATS ===
+Cover every word of the script in order with no gaps or overlap. Split long sentences at clauses, contrast words, item lists, or emotional turns when a visual change can land in 0.5, 1, 2, or 3 seconds. Keep a complete sentence as one shot when it has one clear image.
+Before planning, classify each sentence by its visual ideas — not its punctuation. When one sentence contains a sequential setup, observable action, and reveal or consequence, use 2–3 connected shots if the narration gives each one room to land. Do not wait for a full stop to make a cut.
+Example: for 'Every morning, Daniel wrote down five things he wanted to change about his life:', plan a keyframe for 'Every morning,' that establishes Daniel and his morning desk; an edit for 'Daniel wrote down' that moves to the writing action; then an edit for 'five things he wanted to change about his life:' that reveals the notebook heading or the beginning of the list. Keep Daniel, the desk, and notebook continuous across this chain. Do not reveal later list details before their narration.
+Counterexample: keep 'Daniel stared out at the rain' as one held shot when it has no separate setup, action, or reveal that would earn another visual beat. Never split a sentence merely to make more cuts.
+NUMBERED LISTS AND WRITTEN KEYFRAMES — REQUIRED (ONLY for a list being written/displayed as text):
+This section applies ONLY when the script explicitly describes a list being written down, read off a document, or displayed on a page/diagram/screen (e.g. 'wrote down five habits:', 'the checklist read:'). If the list instead names things the character actually DID, experienced, or that happened to them — not a piece of writing — use TECHNIQUE C (ACTIVITY / EXPERIENCE LISTS) instead; do not force a notebook onto a list of lived activities.
+When a list's heading and items are spoken one at a time, establish the notebook or diary once, then treat every later list item as a progressive edit of that same page. Each item edit must add the new item's exact distinctive words as a new handwritten line in Comic Sans MS, while retaining the heading and earlier lines. Do not substitute another Daniel-at-desk shot, a zoom-only change, or a generic 'writing' action. For example: establish the heading 'Five things I will change'; then add 'Wake up earlier', then 'Read for 20 minutes', then 'Exercise', one visible line per relevant spoken beat. After the list sequence, move to a fresh story state when the narration does (Daniel failing to act, laughing at the unchanged page, waking early, reading, exercising). A camera adjustment may support a change, but it never counts as the change by itself.
+MANDATORY DISTINCT SHOTS FOR LIST SEQUENCES: holding one composition across many consecutive list-item shots reads as a frozen, repeated image even when the handwritten text differs, because the text is a small part of the frame. Keep the same character, page, and room continuous, but never reuse the exact same shot as a new list beat. Make each beat a distinct view with a reason to exist: use hard cuts or independent camera setups where useful, not only a zoom or pan. Never hold the exact same camera framing for more than TWO consecutive list-item shots. Alternate between at least two distinct framings across the sequence, for example: a close insert directly on the notebook page (where the new line is clearly readable) cut against a medium/wide shot of the character reacting, pausing, or sipping coffee between lines. Plan the specific alternation explicitly, e.g. item 1 = close insert on the page, item 2 = medium shot of the character writing with the page visible, item 3 = close insert on the page again, item 4 = a reaction shot pulling back further, and so on — never three or more items in a row from the same camera distance and angle.
+LONG EDIT CHAINS — BREAK THE LOOP AT SHOT 4: alternating between only two framings stops the exact same shot from repeating, but toggling between just those two framings across a long run (4, 5, 6, 7 or more edit shots hanging off one keyframe) still reads as a repeating loop — a viewer notices the sequence keeps swapping between the same close insert and the same medium shot with nothing new. Whenever one keyframe's edit chain reaches its 4th edit shot, that 4th shot must break the loop with a genuinely new camera setup that is neither of the two framings already used in this chain — for example an over-the-shoulder angle, a low or high angle, a wider environmental shot revealing more of the room, or a cut to a new piece of staging or a new detail in the scene. If the chain keeps going past that, repeat this break roughly every 3–4 shots so the sequence keeps evolving rather than settling back into a two-framing loop. This is in addition to the TWO-shot alternation cap above, not a replacement for it — chains of 3 or fewer edit shots are unaffected.
+KEYFRAME — a new scene opening. Use ONLY when:
+  - The setting or staging changes significantly
+  - A strong new topic or emotional register begins
+  - A new speaker or character enters
+  - A list item names a distinct real-world activity/experience rather than written text (see
+    CINEMATIC TECHNIQUE C) — each such item is its own scene, not an edit on a held location
+  - A time-skip transition begins, whether a standalone connector phrase or a time-of-day cue folded
+    into action (see CINEMATIC TECHNIQUE D) — including the dedicated title-card keyframe itself
+  Target: a new keyframe only for a real setting, topic, speaker, or staging reset.
+  scene_description: primary subject + camera framing + scene + mood + style; add a CHARACTER ANCHOR only when that character is visibly in frame.
+  wardrobe_override: null only when this keyframe's activity, setting, and time of day genuinely match the character's default look. Set it to a real, distinctly different outfit (different color family, not a repaint) for a new activity, a new time of day, or any time skip — see TECHNIQUE C and TECHNIQUE D.
+
+EDIT — use for any continuation that should preserve and deliberately change the preceding frame.
+  Each edit shot MUST:
+  1. Cite the immediately preceding accepted shot in base_shot_index; edits are a dependency chain.
+  2. Begin with the visible character's art_style anchor ONLY if a character is in frame. For an environment/object/group/business-focused shot, begin with that actual subject instead.
+  3. Specify a DISTINCT camera setup from the previous shot: a changed angle, distance, lens feel, screen direction, staging position, subject emphasis, or a hard cut to an independent camera view. A zoom/pan alone does not make a new shot. Preserve character identity and environmental continuity across the cut unless the narration calls for a new scene. Even a writeup/title sequence may not hold the same framing for more than TWO consecutive shots (see MANDATORY DISTINCT SHOTS FOR LIST SEQUENCES), and a chain of 4+ edits may not settle into only two repeating framings (see LONG EDIT CHAINS — BREAK THE LOOP AT SHOT 4).
+  4. Add one clear visual change.
+  5. Name the new action, prop, written phrase, expression, or scene state that changes; an edit that only says to zoom, pan, preserve, or keep the scene is invalid.
+  Camera cycling: wide establishing → medium shot → close-up on face → over-the-shoulder → reaction (extreme close-up) → medium-wide → low angle → high angle → wide pull-back → ...
+  NEVER use the same camera framing two shots in a row, with ONE narrow exception: a locked writeup/title sequence may hold framing for at most TWO consecutive shots before it must alternate to a different framing (see MANDATORY DISTINCT SHOTS FOR LIST SEQUENCES above) — it is never a license to hold one framing across three or more consecutive shots. And regardless of alternation, any chain of 4 or more edit shots off one keyframe must break out of a two-framing loop at its 4th shot with a genuinely new camera setup, repeating that break every 3–4 shots thereafter (see LONG EDIT CHAINS — BREAK THE LOOP AT SHOT 4 above).
+
+CINEMATIC TECHNIQUE A — MULTI-ELEMENT SCENES: USE YOUR JUDGMENT
+  When a scene involves multiple visual elements (concept icons, diagram stages, list
+  items, timeline steps, labelled arrows), you have TWO valid options. Choose whichever
+  genuinely serves the story's pacing and impact — this is a creative decision, not a rule:
+
+  OPTION 1 — Progressive reveal (additive build-up across several shots):
+    Use when elements are introduced across distinct narration beats, including clauses within one
+    long sentence. Each addition must earn a short pause for the audience to register it.
+    - Keyframe: character alone (or character + element 1 if the sentence names it).
+    - Each subsequent edit: 'ANCHOR — keep [character + prior elements] — introduce [next element]'
+    The image-edit model preserves everything already visible in the reference image;
+    the edit_instruction only needs to name the NEW element being added.
+
+  OPTION 2 — Single consolidated shot (all elements together):
+    Use when the script names several elements together IN ONE SENTENCE or one fast
+    breath (a quick list), or when the moment calls for immediate visual impact rather
+    than build-up (e.g. an overwhelming pile of evidence, a complete diagram shown at
+    once for emphasis, a summary beat that recaps everything already established).
+    - scene_description or edit_instruction: 'ANCHOR — [scene] — with [element 1], [element 2], [element 3] all visible together — [mood/impact]'
+
+  Decide per scene: does this moment want the audience to watch it build (→ progressive
+  reveal), or does it want the full picture to land in one hit (→ single consolidated
+  shot)? Let the script's rhythm and intent guide the choice.
+
+CINEMATIC TECHNIQUE B — ZOOM CUT (use sparingly — max 1-2 per script):
+  When a narration beat is ≤ 4 words with no main verb (e.g. 'Calm.', 'Certain.',
+  'Silence.', 'No way.') AND it describes a named character's inner state or reaction,
+  the edit shot should zoom into that character's face:
+  edit_instruction: 'ANCHOR — push in — extreme close-up of [character] face — [same expression], heightened intensity — held'
+  For two consecutive zoom-cut beats, push in further on the second:
+  edit_instruction: 'ANCHOR — push in further — reaction close-up, [expression detail], absolute stillness'
+  ONLY use when the excerpt is a deliberate emotional beat, NOT for narrative description or action.
+
+CINEMATIC TECHNIQUE C — ACTIVITY / EXPERIENCE LISTS: EACH ITEM GETS ITS OWN SCENE:
+  Use this when a sentence lists distinct things a character DID, experienced, or that happened —
+  real-world activities or events — NOT items being written down, read aloud from a document, or
+  displayed on a page/diagram (that case is TECHNIQUE A / NUMBERED LISTS above). Each item is its
+  own lived moment, so it deserves its own KEYFRAME, not an edit that holds the same location:
+  - New keyframe per item: change the setting/location to wherever that activity actually happens
+    (a different room, outdoors, a different building) — do not keep the character standing in the
+    same spot with only the action label changing.
+  - ANTI-PATTERN — do not do this: staying in one established room for the whole list and just
+    swapping which prop is on the table (a book, then a notebook, then a jar) is NOT enough variety
+    even though the props differ — if the activities are naturally different in kind (a quiet solo
+    activity vs. a physical/learned skill vs. a household task), they call for genuinely different
+    real-world locations, not one room redressed. Only stay in the same room across items when the
+    activities genuinely could not happen anywhere else (e.g. two things both done at one desk).
+  - Do not let a shared time-frame or connecting phrase ('during that hour', 'that evening', 'over
+    those weeks') keep every listed activity in one physical place. A single named span of time can
+    still cut to wherever each activity actually happens in the real world — treat it like a montage,
+    not a single continuous take. The narration describing one hour does not mean the audience has to
+    watch all of it happen at one desk.
+  - If an item names a VAGUE activity with no specific setting implied ('learned something new',
+    'tried something different'), invent a concrete, visually vivid, specific activity for it
+    (skating, swimming, a pottery class, a cooking lesson) rather than a generic or abstract stand-in
+    (reading a book about the topic, writing in a notebook) — pick whichever concrete activity gives
+    the sequence the most visual contrast against its neighboring items.
+  - Change the pose and action to match: reading is seated/reclined with a book; learning to skate
+    is standing, mid-motion, outdoors; putting money away is a close interior shot at a drawer or
+    safe. Pick the staging a filmmaker would actually use for that specific activity.
+  - Wardrobe MAY change too when the activity or time of day calls for it (nightwear for reading in
+    bed, athletic wear for an outdoor lesson, home clothes for an evening chore). Set this via the
+    keyframe's 'wardrobe_override' field — leave it null when the default look still fits.
+  - Choose the camera setup that best suits each specific activity (e.g. an aerial/overhead angle
+    for someone reading in bed, a dynamic wide shot for an outdoor skating lesson, a tight interior
+    shot for handling money at a safe) rather than mechanically cycling through a generic list of
+    angles. Every item should look like a genuinely different moment in the character's life.
+  - The character's facial_features and art_style anchor still apply to every item — the audience
+    must still recognize the same person even as the room, activity, and outfit change around them.
+
+  EXAMPLE C — Activity list (lived experiences, not a written list)
+  (Script excerpt: 'During that hour, she read a book, learned something new, and saved the money
+  she would have spent.')
+    Shot keyframe, text='During that hour, she read a book,':
+      scene_description = 'CINEMATIC PHOTOREALISM, [physical], [face] — aerial shot looking
+      down at her stretched across her bed absorbed in a paperback, evening lamp light'
+      wardrobe_override = 'soft grey pajama set'
+    Shot keyframe, text='learned something new,':
+      scene_description = 'CINEMATIC PHOTOREALISM, [physical], [face] — wide outdoor shot,
+      she wobbles mid-stride on ice skates at a rink, arms out for balance, bright afternoon light'
+      wardrobe_override = 'puffer jacket, jeans, and skates'
+    Shot keyframe, text='and saved the money she would have spent.':
+      scene_description = 'CINEMATIC PHOTOREALISM, [physical], [face] — close interior shot
+      in a dim bedroom, she tucks folded bills into a small home safe, warm desk lamp'
+      wardrobe_override = 'nightgown'
+    Note: [color] is dropped from scene_description here because every item sets a wardrobe_override —
+    never write the character's default color_palette words into scene_description in the same shot
+    where you also set a wardrobe_override; the override alone determines this shot's look.
+    Why three keyframes, not one held scene with edits: each clause is a separate lived activity in
+    a different place — forcing them into one location with only camera changes would flatten three
+    distinct moments into a single static scene.
+
+CINEMATIC TECHNIQUE D — TIME-SKIP TRANSITIONS: MARK THE JUMP, THEN SHOW ITS EFFECT:
+  Use this whenever the script signals that time has passed between beats — an explicit connector
+  phrase ('A month later,', 'Three days later,', 'Years passed,', 'The following week,') or a time-of-
+  day cue folded into ongoing narration ('The next morning,', 'That night,'). Two distinct cases:
+  - STANDALONE TIME-SKIP CONNECTOR (its own clause, not describing an action itself — a chapter-break
+    phrase like 'A month later,' or 'Three days later,'): give it its own TITLE CARD keyframe — a
+    full-bleed near-black background with no character present, and the exact phrase rendered as
+    on-screen text in Comic Sans MS, centered. scene_description example: 'full-bleed near-black
+    background, no characters, centered on-screen text reading "A month later" in Comic Sans MS, still and minimal'. wardrobe_override is null for a title card (no character is shown). The keyframe
+    immediately after the title card starts the new scene (see below).
+  - TIME CUE FOLDED INTO ACTION (the phrase leads straight into what the character is doing, e.g.
+    'The next morning, she was still lying in bed, thinking'): no title card needed — go straight to a
+    new keyframe staged for that specific moment (waking in bed, morning light, a reflective pose) rather than reusing the previous scene's blocking.
+  - EITHER WAY, THE KEYFRAME AFTER A TIME SKIP MUST SHOW THE PASSAGE OF TIME: change the setting/pose to fit the new moment, and set wardrobe_override — a longer skip ('a month later') calls for a visibly new outfit in a different color family from the default, signaling real time has passed;
+    a short skip to the next morning calls for sleepwear or an early-morning look distinct from the
+    outfit worn the night before. Do not resume the prior scene's exact outfit after a named time
+    skip — that is the one case where keeping wardrobe unchanged is almost always wrong.
+  - This is additive to TECHNIQUE C: a time-skip beat inside a list of lived activities still gets
+    its own keyframe and, where it applies, a title card, on top of everything TECHNIQUE C already
+    requires for that item.
+
+  EXAMPLE D — Time-skip transitions
+  (Script excerpt: 'The next morning, she was still lying in bed, thinking. A month later, she wore
+  a new outfit to work, ready for the promotion.')
+    Shot keyframe, text='The next morning, she was still lying in bed, thinking.':
+      scene_description = 'CINEMATIC PHOTOREALISM, [physical], [face] — soft morning light through curtains, she lies on her back staring at the ceiling, one hand resting on her forehead, still and thoughtful'
+      wardrobe_override = 'pyjamas, hair loose and tousled from sleep'
+    Shot keyframe, text='A month later,':
+      scene_description = 'full-bleed near-black background, no characters, centered on-screen text reading "A month later" in Comic Sans MS, still and minimal'
+      wardrobe_override = null
+    Shot keyframe, text='she wore a new outfit to work, ready for the promotion.':
+      scene_description = 'CINEMATIC PHOTOREALISM, [physical], [face] — confident wide shot walking into a bright office lobby, shoulders back, morning light'
+      wardrobe_override = 'tailored charcoal blazer and cream blouse, a visibly new, more polished look than her everyday outfit'
+    Why a title card plus a wardrobe change: the standalone connector phrase is a chapter break with no action of its own, so it earns its own text card; the new outfit afterward is what makes the audience feel a month actually passed, not just that the location changed.
+    Note: [color] is dropped from scene_description in both keyframes above because each sets a wardrobe_override — never state the character's default color_palette words in scene_description when that same shot also has a wardrobe_override; the override alone determines this shot's look.
+
+=== PACING CALIBRATION ===
+Choose shot count from the story's visual beats, not its sentence count. A dense 20-second
+sentence may need several 0.5–3 second changes; a simple statement can hold on one frame.
+The wardrobe, time-skip, and camera rules above exist to make each visual beat more specific — they are reasons to add or keep a shot, never reasons to merge or drop one. A time-skip, a new activity, or a new location IS itself a new visual beat and earns its own keyframe on top of whatever the sentence-level split already called for. Do not shrink the shot list to make the wardrobe/camera re-checks easier to satisfy — a longer, more varied shot list that follows every rule is the goal, not a shorter one.
+Before writing JSON, check that every split is a contiguous verbatim excerpt and earns its image.
+
+=== RULES ===
+- The FIRST shot must always be a keyframe.
+- Each edit shot's base_shot_index = its immediately preceding shot index (integer).
+- Each shot's 'text' = exact verbatim excerpt from the script.
+- All shot texts together = entire script, no gaps, no overlap.
+- scene_description is null for edit shots; edit_instruction is null for keyframes.
+- Keep expression/pose/action/background_mood SHORT (5-15 words each).
+- SUBJECT (re-check before you output): for every shot, set subject_focus to the exact thing the audience should primarily notice (character, environment, object/detail, group, business/process, on-screen idea, or consequence). Then set character_visibility to on_screen, background, or off_screen. character_name remains the continuity character/role label, but it does NOT require that person to be visible. If narration is about a kitchen, room, table, handwriting, family, business, or a transition, do not default to a character close-up: choose the appropriate environment, insert, group, process, or transition composition. Only choose on_screen when the character is genuinely the subject or necessary to communicate the action/reaction.
+- ACTIVITY LISTS (re-check before you output): if any part of the script names distinct real-world activities/experiences a character had (see CINEMATIC TECHNIQUE C) rather than text being written or displayed, each activity gets its OWN keyframe in its own real-world setting. Before finalizing, check every such list: if two or more of its items are still sitting in the same established room with only a prop or camera angle swapped, that is the exact anti-pattern TECHNIQUE C warns against — revise so each activity happens where it would actually happen, even if the narration wraps them all in one shared span of time like 'during that hour'.
+- TIME SKIPS (re-check before you output): a standalone time-skip connector ('A month later,', 'Three days later,') gets its own near-black title-card keyframe with the phrase as on-screen text and wardrobe_override null; the keyframe right after any time skip (title card or an inline cue like 'the next morning') must set wardrobe_override to a genuinely different outfit (different color family for a long skip, sleepwear for waking up) — resuming the exact prior outfit after a named time skip is wrong. See CINEMATIC TECHNIQUE D.
+- WARDROBE (re-check before you output): scan every wardrobe_override you set — if two or more still describe the same core colors as the character's default color_palette, that is not a real change; revise so an override outfit reads as visibly different in color family and style, not the same colors in a different garment. Also re-check every scene_description against its own shot's wardrobe_override: never write the character's default color_palette words into scene_description when that same shot also sets a wardrobe_override — stating both together contradicts the override and undoes the wardrobe change you just made; describe only [physical] and [face] in scene_description for such a shot and let wardrobe_override alone define its look.
+- CAMERA AND CONTINUITY (re-check before you output): under every keyframe, each edit must read as a distinct purposeful shot, not the identical composition with only a zoom, pan, or minor prop change. Keep the same character recognizably identical and the same environment spatially continuous unless the narration changes them, but use a hard cut or independent camera setup when that makes the next beat clearer. Never hold the identical framing for more than TWO consecutive edit shots, including locked writeup/title/list sequences. Before finalizing, count the consecutive edit shots under each keyframe: if that chain reaches a 4th edit shot, its edit_instruction MUST describe a camera setup that is neither of the two framings already used earlier in that same chain (a new angle, distance, screen direction, subject emphasis, or staging detail — not 'hold the locked composition' again), and this break must repeat roughly every 3–4 shots for any longer chain. Re-read every edit_instruction you are about to output for the phrase 'hold'/'locked composition'/'same framing' repeated three or more times in a row under one keyframe — that phrasing is the exact failure this rule exists to prevent, and it must never appear more than twice in a row.
+
+Return ONLY this JSON object:
+{
+  "characters": [
+    {
+      "name": "...",
+      "description": "one-sentence psychological role",
+      "appearance": "compact 15-25 word visual anchor",
+      "visual_persona": {
+        "art_style": "...",
+        "physical_description": "...",
+        "facial_features": "...",
+        "color_palette": "...",
+        "distinctive_elements": "...",
+        "expression_type": "..."
+      }
+    }
+  ],
+  "shots": [
+    {
+      "text": "exact contiguous verbatim script excerpt — a sentence, clause, or short phrase",
+      "type": "keyframe",
+      "character_name": "...",
+      "scene_description": "PRIMARY SUBJECT — camera + scene + mood + style; character anchor only if visible",
+      "edit_instruction": null,
+      "base_shot_index": null,
+      "subject_focus": "character | environment | object/detail | group | business/process | on-screen idea | consequence",
+      "character_visibility": "on_screen | background | off_screen",
+      "wardrobe_override": null,
+      "expression": "short phrase",
+      "pose": "short phrase",
+      "action": "short phrase",
+      "background_mood": "short phrase",
+      "duration_hint_seconds": 1
+    },
+    {
+      "text": "exact contiguous verbatim script excerpt — a sentence, clause, or short phrase",
+      "type": "edit",
+      "character_name": "...",
+      "scene_description": null,
+      "edit_instruction": "PRIMARY SUBJECT — camera move + visual change; character anchor only if visible",
+      "base_shot_index": 0,
+      "subject_focus": "character | environment | object/detail | group | business/process | on-screen idea | consequence",
+      "character_visibility": "on_screen | background | off_screen",
+      "expression": "short phrase",
+      "pose": "short phrase",
+      "action": "short phrase",
+      "background_mood": "short phrase",
+      "duration_hint_seconds": 1
+    }
+  ]
+}
