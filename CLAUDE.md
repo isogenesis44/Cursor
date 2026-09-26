@@ -18,7 +18,10 @@ Claude operates the app on their behalf; the user only does the ChatGPT Pro part
 5. When the user says the images are ready, find the Drive folder, download every `shot_####.png` plus the narration audio
    through Composio (GOOGLEDRIVE_FIND_FILE with folder_id → GOOGLEDRIVE_DOWNLOAD_FILE → fetch the s3url),
    then upload the images to `/api/projects/:id/images` (batches of ~25) and the audio to `/api/projects/:id/audio`.
-6. POST `/transcribe` (WhisperX), check `alignStats.matchRate`, then POST `/render`. Send the MP4 with SendUserFile
-   (Drive uploads are capped at 5MB, so deliver the video in chat).
+6. POST `/transcribe` (default engine `openai/whisper`), check `alignStats.matchRate` (expect 90%+), then POST `/render`.
+   Save the Whisper JSON to `projects/<slug>/whisper.json` (restore later with `/transcript/import`).
+   Send the MP4 with SendUserFile (Drive uploads are capped at 5MB, so deliver the video in chat). Chat files are capped at 30MB:
+   if the render is bigger, re-encode with Remotion's bundled ffmpeg
+   (`node_modules/@remotion/compositor-linux-x64-gnu/ffmpeg`, run with `LD_LIBRARY_PATH` set to that folder; `-c:v libx264 -crf 23 -maxrate 4M -bufsize 8M -c:a copy`).
 
 See README.md for the API and settings.

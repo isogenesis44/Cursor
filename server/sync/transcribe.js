@@ -9,25 +9,35 @@ export const WHISPER_MODELS = {
 
 const AUDIO_TYPES = { mp3: 'audio/mpeg', wav: 'audio/wav', m4a: 'audio/mp4', aac: 'audio/aac', ogg: 'audio/ogg', flac: 'audio/flac', webm: 'audio/webm' };
 
-export async function transcribe(audioPath, { engine = 'whisperx', language, script, onStatus } = {}) {
+export async function transcribe(audioPath, { engine = 'openai', language, onStatus } = {}) {
   const ext = audioPath.split('.').pop().toLowerCase();
   const url = await uploadFile(audioPath, AUDIO_TYPES[ext] || 'application/octet-stream');
   const model = process.env[`WHISPER_MODEL_${engine.toUpperCase()}`] || WHISPER_MODELS[engine];
   if (!model) throw new Error(`Unknown whisper engine "${engine}"`);
-  // A short slice of the script as the initial prompt helps Whisper with names and spelling.
-  const initialPrompt = script ? script.split(/\s+/).slice(0, 60).join(' ') : undefined;
+  // No script initial_prompt: feeding Whisper the script made it hallucinate whole passages.
   let input;
   if (engine === 'whisperx') {
-    input = { audio_file: url, align_output: true, ...(language ? { language } : {}), ...(initialPrompt ? { initial_prompt: initialPrompt } : {}) };
+    input = { audio_file: url, align_output: true, ...(language ? { language } : {}) };
   } else if (engine === 'fast') {
-    input = { audio: url, timestamp: 'word', task: 'transcribe', ...(language ? { language } : {}) };
+    // This model wants the language name ("english"), not the ISO code ("en").
+    const languageName = language ? languageToName(language) : null;
+    input = { audio: url, timestamp: 'word', task: 'transcribe', ...(languageName ? { language: languageName } : {}) };
   } else {
-    input = { audio: url, transcription: 'plain text', ...(language ? { language } : {}), ...(initialPrompt ? { initial_prompt: initialPrompt } : {}) };
+    input = { audio: url, transcription: 'plain text', temperature: 0, condition_on_previous_text: false, ...(language ? { language } : {}) };
   }
   const output = await runModel(model, input, { onStatus });
   const words = normalizeTranscript(output);
   if (!words.length) throw new Error('Whisper returned no words.');
   return { engine, model, words };
+}
+
+function languageToName(language) {
+  if (language.length > 3) return language.toLowerCase();
+  try {
+    return new Intl.DisplayNames(['en'], { type: 'language' }).of(language).toLowerCase();
+  } catch {
+    return null;
+  }
 }
 
 const clean = (w) => String(w ?? '').trim();

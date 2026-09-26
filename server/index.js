@@ -340,7 +340,6 @@ app.post('/api/projects/:id/transcribe', wrap(async (req, res) => {
       const result = await transcribe(projectDir(p.id, 'audio', p.audio.file), {
         engine: p.settings.whisperEngine,
         language: p.settings.language || undefined,
-        script: p.script,
         onStatus: (pred) => setJob(p, 'transcribe', { message: `Whisper: ${pred.status}…` }),
       });
       p.transcript = { engine: result.engine, model: result.model, words: result.words };
