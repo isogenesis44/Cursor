@@ -171,13 +171,20 @@ export function alignShots(shots, words, { duration, fps = 30, leadSeconds = 0, 
   const minDur = Math.max(frame, minSeconds ?? frame);
   const firstToken = new Array(shots.length).fill(-1);
   const matchedTokens = new Array(shots.length).fill(0);
+  const heardTokens = new Array(shots.length).fill(0);
   const totalTokens = new Array(shots.length).fill(0);
   for (let i = 0; i < n; i++) {
     const s = tokenShot[i];
     if (firstToken[s] < 0) firstToken[s] = i;
     totalTokens[s]++;
     if (exact[i]) matchedTokens[s]++;
+    if (map[i] >= 0) heardTokens[s]++;
   }
+  // Closing shots with no heard words (e.g. an outro the narrator didn't record) are left out,
+  // so the last spoken image holds to the end instead of the tail flashing by.
+  let spokenShots = shots.length;
+  while (spokenShots > 1 && heardTokens[spokenShots - 1] === 0) spokenShots--;
+  if (!heardTokens.some(Boolean)) spokenShots = shots.length;
   const starts = shots.map((_, si) => {
     if (firstToken[si] >= 0) return Math.max(0, time[firstToken[si]] - leadSeconds);
     return null; // shot with no words (e.g. only punctuation): placed after the previous one
@@ -189,10 +196,10 @@ export function alignShots(shots, words, { duration, fps = 30, leadSeconds = 0, 
   }
   // Snap to frames.
   const snap = (t) => +(Math.round(t * fps) / fps).toFixed(4);
-  const end = Math.max(snap(audioEnd), snap(starts[starts.length - 1] + minDur));
-  const timeline = shots.map((_, si) => {
+  const end = Math.max(snap(audioEnd), snap(starts[spokenShots - 1] + minDur));
+  const timeline = shots.slice(0, spokenShots).map((_, si) => {
     const start = snap(starts[si]);
-    const stop = si + 1 < shots.length ? snap(starts[si + 1]) : end;
+    const stop = si + 1 < spokenShots ? snap(starts[si + 1]) : end;
     return {
       shot: si + 1,
       start,
@@ -209,6 +216,7 @@ export function alignShots(shots, words, { duration, fps = 30, leadSeconds = 0, 
       matchedWords: exactCount,
       matchRate: n ? +(exactCount / n).toFixed(3) : 0,
       totalSeconds: end,
+      unspokenShots: shots.length - spokenShots,
     },
   };
 }

@@ -25,6 +25,17 @@ test('alignShots puts each image on the first word of its narration', () => {
   assert.equal(stats.matchRate, 1);
 });
 
+test('alignShots leaves out closing shots the narrator never recorded', () => {
+  const shots = [{ text: 'Calm.' }, { text: 'Certain.' }, { text: 'Subscribe for more.' }, { text: 'See you next time.' }];
+  const words = [
+    { word: 'Calm.', start: 0.4, end: 0.8 },
+    { word: 'Certain.', start: 1.3, end: 1.9 },
+  ];
+  const { timeline, stats } = alignShots(shots, words, { duration: 3, fps: 30 });
+  assert.deepEqual(timeline.map((t) => [t.shot, t.start, t.end]), [[1, 0, 1.3], [2, 1.3, 3]]);
+  assert.equal(stats.unspokenShots, 2);
+});
+
 test('alignShots survives misheard words and keeps time monotonic', () => {
   const text = 'the quick brown fox jumps over the lazy dog and runs into the forest where nobody can find him';
   const tokens = text.split(' ');
