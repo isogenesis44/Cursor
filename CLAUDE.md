@@ -19,13 +19,16 @@ The narration audio comes later, either in the Drive image folder or attached in
    `projects/<slug>/shot-plan.json` (from `/export/plan.json`), `projects/<slug>/settings.json`, and the style image, then commit and push.
    A later session restores it with `POST /api/projects/:id/plan/import` (after PATCHing the script).
 4. Send the user the ChatGPT job JSON (`/export/chatgpt.json`) and instructions (`/export/instructions.txt`) with SendUserFile.
-5. When the user says the images are ready, find the Drive folder, download every `shot_####.png` plus the narration audio
-   through Composio (GOOGLEDRIVE_FIND_FILE with folder_id → GOOGLEDRIVE_DOWNLOAD_FILE → fetch the s3url),
+5. When the user says the images are ready, find the Drive folder, download every `shot_####.png` plus the narration audio,
    then upload the images to `/api/projects/:id/images` (batches of ~25) and the audio to `/api/projects/:id/audio`.
+   For more than ~20 images, do the downloads in COMPOSIO_REMOTE_WORKBENCH (214 images took ~40s): list the folder with
+   GOOGLEDRIVE_FIND_FILE, run GOOGLEDRIVE_DOWNLOAD_FILE + fetch the s3url with a ThreadPoolExecutor(16) (wrap it in
+   `contextlib.redirect_stdout` — the helper prints every response), zip ~43 images per ZIP_STORED archive, PUT each zip to a
+   presigned link (step 7a) and `curl -L` its `download_url` here. For a few images, GOOGLEDRIVE_DOWNLOAD_FILE → fetch the s3url.
 6. POST `/transcribe` (default engine `openai/whisper`), check `alignStats.matchRate` (expect 90%+), then POST `/render`.
    Save the Whisper JSON to `projects/<slug>/whisper.json` (restore later with `/transcript/import`).
 7. **Deliver the full-quality MP4 to Google Drive** (same folder as the images, named `<Title>.mp4`). The normal Drive upload is
-   capped at 5MB, so use this route (tested with a 44MB file, checksum verified):
+   capped at 5MB, so use this route (tested up to an 886MB, 11-minute video; checksum verified):
    a. In COMPOSIO_REMOTE_WORKBENCH, request a presigned upload link and print only `key` and `upload_url` (never print the access key):
       ```python
       import requests, os
@@ -36,7 +39,7 @@ The narration audio comes later, either in the Drive image folder or attached in
       ```
    b. From this machine: `curl -X PUT -H "Content-Type: video/mp4" --data-binary @<render>.mp4 '<upload_url>'` (expect 200; link lasts 1 hour).
    c. GOOGLEDRIVE_RESUMABLE_UPLOAD with `file_to_upload: {name, mimetype: "video/mp4", s3key: <key>}`, `folder_to_upload_to: <folder id>`,
-      `chunkSize: 8388608`. Then GOOGLEDRIVE_GET_FILE_METADATA and compare `md5Checksum` with `md5sum` of the local file.
+      `chunkSize: 33554432`. Then GOOGLEDRIVE_GET_FILE_METADATA and compare `md5Checksum` with `md5sum` of the local file.
    Give the user the Drive link. Only if this fails, fall back to SendUserFile (30MB cap): re-encode with Remotion's bundled ffmpeg
    (`node_modules/@remotion/compositor-linux-x64-gnu/ffmpeg`, run with `LD_LIBRARY_PATH` set to that folder;
    `-c:v libx264 -crf 23 -maxrate 4M -bufsize 8M -c:a copy`).
