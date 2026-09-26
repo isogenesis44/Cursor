@@ -5,7 +5,11 @@ Claude operates the app on their behalf; the user only does the ChatGPT Pro part
 
 ## Setup already done by the user
 - `REPLICATE_API_TOKEN` is set in the cloud environment settings (check with `[ -n "$REPLICATE_API_TOKEN" ]`, never print it).
-- Google Drive is connected through the Composio MCP (`googledrive` toolkit). Use it to fetch images/audio.
+- Google Drive is connected through the Composio MCP (`googledrive` toolkit). Use it to fetch images/audio and to deliver the video.
+
+## Starting a new video
+The user starts a new cloud session and sends: the video name, the script, the style reference image, and the aspect ratio.
+The narration audio comes later, either in the Drive image folder or attached in chat. Past projects live in `projects/<slug>/`.
 
 ## Workflow
 1. `npm install` (if needed), then start the server in the background: `npm start` (port 3000).
@@ -18,7 +22,23 @@ Claude operates the app on their behalf; the user only does the ChatGPT Pro part
 5. When the user says the images are ready, find the Drive folder, download every `shot_####.png` plus the narration audio
    through Composio (GOOGLEDRIVE_FIND_FILE with folder_id → GOOGLEDRIVE_DOWNLOAD_FILE → fetch the s3url),
    then upload the images to `/api/projects/:id/images` (batches of ~25) and the audio to `/api/projects/:id/audio`.
-6. POST `/transcribe` (WhisperX), check `alignStats.matchRate`, then POST `/render`. Send the MP4 with SendUserFile
-   (Drive uploads are capped at 5MB, so deliver the video in chat).
+6. POST `/transcribe` (default engine `openai/whisper`), check `alignStats.matchRate` (expect 90%+), then POST `/render`.
+   Save the Whisper JSON to `projects/<slug>/whisper.json` (restore later with `/transcript/import`).
+7. **Deliver the full-quality MP4 to Google Drive** (same folder as the images, named `<Title>.mp4`). The normal Drive upload is
+   capped at 5MB, so use this route (tested with a 44MB file, checksum verified):
+   a. In COMPOSIO_REMOTE_WORKBENCH, request a presigned upload link and print only `key` and `upload_url` (never print the access key):
+      ```python
+      import requests, os
+      r = requests.post(os.environ.get("BACKEND_URL", "https://backend.composio.dev") + "/api/v3/tool_router/internal/presigned_url",
+                        json={"operation": "upload"},
+                        headers={"x-session-access-key": os.environ["COMPOSIO_WORKBENCH_ACCESS_KEY"], "Content-Type": "application/json"})
+      r.raise_for_status(); j = r.json(); print("KEY=" + j["key"]); print("UPLOAD=" + j["upload_url"])
+      ```
+   b. From this machine: `curl -X PUT -H "Content-Type: video/mp4" --data-binary @<render>.mp4 '<upload_url>'` (expect 200; link lasts 1 hour).
+   c. GOOGLEDRIVE_RESUMABLE_UPLOAD with `file_to_upload: {name, mimetype: "video/mp4", s3key: <key>}`, `folder_to_upload_to: <folder id>`,
+      `chunkSize: 8388608`. Then GOOGLEDRIVE_GET_FILE_METADATA and compare `md5Checksum` with `md5sum` of the local file.
+   Give the user the Drive link. Only if this fails, fall back to SendUserFile (30MB cap): re-encode with Remotion's bundled ffmpeg
+   (`node_modules/@remotion/compositor-linux-x64-gnu/ffmpeg`, run with `LD_LIBRARY_PATH` set to that folder;
+   `-c:v libx264 -crf 23 -maxrate 4M -bufsize 8M -c:a copy`).
 
 See README.md for the API and settings.

@@ -1,0 +1,189 @@
+{
+  "format": "ai-director-chatgpt-image-job/v1",
+  "project": "Twelve Billion Family",
+  "total_images": 16,
+  "images_in_this_file": 16,
+  "aspect_ratio": "16:9",
+  "image_size": "1536x1024 (landscape)",
+  "google_drive_folder": "AI Director/Twelve Billion Family",
+  "style_lock": {
+    "source": "attached style reference image",
+    "rule": "STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead.",
+    "informational_style_text": null
+  },
+  "schedule": {
+    "images_per_run": 40,
+    "total_runs": 1,
+    "runs": [
+      {
+        "run": 1,
+        "first": 1,
+        "last": 16,
+        "count": 16
+      }
+    ]
+  },
+  "instructions_for_chatgpt": "You are my image production assistant. The attached JSON file is an image job for the video \"Twelve Billion Family\". I have also attached my STYLE REFERENCE image.\n\nSTEP 0 — Read the whole JSON first, then reply with: total images (16), images per run (40), number of runs (1), and the first/last file_name of each run. Do not generate anything in that first reply.\n\nEVERY RUN (this is a scheduled task — do this each time it fires):\n1. Open the Google Drive folder \"AI Director/Twelve Billion Family\" and list which file_name values from the JSON already exist there.\n2. Generate the next 40 MISSING images, strictly in ascending \"number\" order. Never skip a number.\n3. For each image, use its \"prompt\" exactly as written — do not shorten, summarise, or rewrite it.\n4. Every image is landscape 16:9 (1536x1024 (landscape)). No borders, captions, subtitles, watermarks, or text that the prompt does not ask for.\n5. If \"kind\" is \"continues_previous\": use the image named in \"reference_image\" (from this chat or from the Drive folder) as the continuity reference — same characters, faces, wardrobe, environment, props, and lighting — and change ONLY what the prompt asks, with the new camera framing it describes.\n6. If \"kind\" is \"new_scene\": compose a fresh frame (do not copy the previous composition), but keep every character's identity anchor (art style, build, face) identical.\n7. STYLE LOCK: the attached style reference image is the SOLE style authority and overrides every other style word. STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead.\n8. If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS.\n9. Save each image to \"AI Director/Twelve Billion Family\" as a PNG named EXACTLY its \"file_name\" (e.g. shot_0001.png).\n10. If an image fails, retry it once; if it still fails, note it and continue with the next number.\n11. End each run with a short report: files saved this run, any failures, and the next file_name to make. When all images exist, say \"ALL IMAGES COMPLETE\".",
+  "characters": [
+    {
+      "name": "Mara Vale",
+      "identity_anchor": "stylized 3D animated storybook realism with soft painterly textures, average height, slim build, slightly guarded shoulders and restrained movements, large almond hazel eyes, arched brows, oval face, small mole beneath left eye",
+      "default_palette": "terracotta dress, cream knit layers, muted gold accents",
+      "always_carries": "plain oval locket inherited from her grandmother"
+    },
+    {
+      "name": "Elias Vale",
+      "identity_anchor": "stylized 3D animated storybook realism with soft painterly textures, tall, broad-shouldered build with a slight protective forward stoop, deep-set brown eyes, thick straight brows, square jaw, distinctive cleft chin",
+      "default_palette": "ochre overshirt, brown trousers, dark leather accents",
+      "always_carries": "worn braided wrist cord"
+    },
+    {
+      "name": "June Vale",
+      "identity_anchor": "stylized 3D animated storybook realism with soft painterly textures, short, compact build with upright posture and restless expressive hands, round dark eyes, high curved brows, heart-shaped face, left-cheek dimple",
+      "default_palette": "sage blouse, plum skirt, warm brass accents",
+      "always_carries": "small crescent-shaped earrings"
+    },
+    {
+      "name": "Rosa Vale",
+      "identity_anchor": "stylized 3D animated storybook realism with soft painterly textures, petite, sturdy older woman with straight-backed posture and deliberate gestures, soft hooded gray eyes, rounded cheeks, silver brows, fine radiating smile lines",
+      "default_palette": "powder-blue cardigan, navy dress, silver accents",
+      "always_carries": "thin reading glasses suspended from a cord"
+    },
+    {
+      "name": "Adrian Pike",
+      "identity_anchor": "stylized 3D animated storybook realism with soft painterly textures, lean, medium-height build with rigid posture and precise economical gestures, narrow gray eyes, sharply angled brows, long nose, neatly trimmed mustache",
+      "default_palette": "charcoal suit, white shirt, burgundy tie",
+      "always_carries": "rectangular spectacles and an immaculate document case"
+    }
+  ],
+  "images": [
+    {
+      "number": 1,
+      "file_name": "shot_0001.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Imagine your family kitchen.",
+      "prompt": "ENVIRONMENT — symmetrical 16:9 wide view of a modest lived-in kitchen, mismatched chairs, aging cabinets and warm afternoon window light, stylized 3D animated storybook realism with soft painterly textures — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 2,
+      "file_name": "shot_0002.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0001.png",
+      "narration": "Same wobbly table.",
+      "prompt": "OBJECT DETAIL — hard cut to a low 16:9 floor-level angle beneath the same kitchen table as one shortened leg rocks against a folded cardboard shim, stylized 3D animated storybook realism with soft painterly textures — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 3,
+      "file_name": "shot_0003.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0002.png",
+      "narration": "Same handwriting on the fridge.",
+      "prompt": "OBJECT DETAIL — hard cut to a frontal 16:9 close insert of the refrigerator covered by curling family notes, childish drawings and illegible handwritten loops held under mismatched magnets, stylized 3D animated storybook realism with soft painterly textures — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 4,
+      "file_name": "shot_0004.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Now imagine one relative is suddenly worth twelve billion dollars.",
+      "prompt": "GROUP — stylized 3D animated storybook realism with soft painterly textures; Mara, average-height slim with guarded shoulders, large almond hazel eyes, arched brows and left-eye mole, wearing terracotta and cream, sits frozen beside a phone displaying \"NET WORTH: $12 BILLION\" in Comic Sans MS; Elias, tall and broad with deep-set brown eyes, thick brows and cleft chin, wearing ochre and brown, leans behind her; June, short and compact with round dark eyes, high brows and left-cheek dimple, wearing sage and plum, stares from screen right; Rosa, petite and sturdy with hooded gray eyes, rounded cheeks and smile lines, wearing powder blue and navy, stands by the sink; tense 16:9 medium-wide kitchen composition — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 5,
+      "file_name": "shot_0005.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0004.png",
+      "narration": "The room doesn't change.",
+      "prompt": "ENVIRONMENT — hard cut to a low 16:9 angle across the now-empty tabletop, preserving the same wobble, refrigerator notes, aging cabinets and afternoon light while Mara's glowing phone remains untouched at center, stylized 3D animated storybook realism with soft painterly textures — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 6,
+      "file_name": "shot_0006.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0005.png",
+      "narration": "Everything else does.",
+      "prompt": "CONSEQUENCE — cut to a steep overhead 16:9 view of the same kitchen as legal envelopes, surveillance monitors, ringing phones and barred shadows suddenly encroach around the unchanged table, stylized 3D animated storybook realism with soft painterly textures — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 7,
+      "file_name": "shot_0007.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Extra locks on doors that used to just be doors.",
+      "prompt": "OBJECT DETAIL — oblique 16:9 close-up of a once-simple painted front door now burdened with multiple deadbolts, chain locks, keypad and reinforced strike plates, stylized 3D animated storybook realism with soft painterly textures — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 8,
+      "file_name": "shot_0008.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Guilt every time you're sad,",
+      "prompt": "stylized 3D animated storybook realism with soft painterly textures, average height, slim build, slightly guarded shoulders and restrained movements, large almond hazel eyes, arched brows, oval face, small mole beneath left eye — for THIS scene only, wearing loose cream sleep shirt and slate-gray lounge pants, barefoot with unstyled hair instead of the usual outfit — CHARACTER — stylized 3D animated storybook realism with soft painterly textures; Mara, average-height and slim with guarded shoulders, large almond hazel eyes, arched brows and a small mole beneath her left eye, sits sideways on a dark bedroom floor wearing a loose cream sleep shirt and slate lounge pants; 16:9 medium profile beneath cool rain-streaked window light — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 9,
+      "file_name": "shot_0009.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0008.png",
+      "narration": "because \"you have twelve billion reasons not to be.\"",
+      "prompt": "stylized 3D animated storybook realism with soft painterly textures, large almond hazel eyes, arched brows, oval face, small mole beneath left eye — STYLIZED 3D ANIMATED STORYBOOK REALISM WITH SOFT PAINTERLY TEXTURES, Mara's almond hazel eyes and left-eye mole — hard cut to a tight 16:9 mirror-reflection angle as judgmental speech bubbles surround her reflection, the largest reading \"YOU HAVE TWELVE BILLION REASONS NOT TO BE\" in Comic Sans MS — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 10,
+      "file_name": "shot_0010.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Siblings who shared bunk beds",
+      "prompt": "OBJECT DETAIL — nostalgic 16:9 wide view of a cramped childhood bedroom with a scuffed wooden bunk bed, two differently worn quilts, paired pillow dents and shared toys beneath warm dusk light, stylized 3D animated storybook realism with soft painterly textures — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 11,
+      "file_name": "shot_0011.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "now negotiating inheritance across a lawyer's table.",
+      "prompt": "GROUP — stylized 3D animated storybook realism with soft painterly textures; Mara, slim with guarded shoulders, almond hazel eyes, arched brows and left-eye mole, wears a navy tailored suit at the far end; Elias, tall and broad with deep-set brown eyes, thick brows and cleft chin, wears a cool-gray jacket; June, short and compact with round dark eyes, high brows and left-cheek dimple, wears an ivory blouse and cobalt skirt; Adrian, lean and rigid with narrow gray eyes, angled brows, long nose and trimmed mustache, wears a forest-green suit; formal 16:9 lateral wide shot across an oversized polished table divided by inheritance documents — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 12,
+      "file_name": "shot_0012.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "It's not a fairytale.",
+      "prompt": "OBJECT DETAIL — dramatic 16:9 close composition of an ornate gilded storybook snapping shut atop cold legal papers, its imagined castle glow extinguished by the closing cover, stylized 3D animated storybook realism with soft painterly textures — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 13,
+      "file_name": "shot_0013.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "It's just a regular family,",
+      "prompt": "GROUP — stylized 3D animated storybook realism with soft painterly textures; Mara, slim with guarded shoulders, almond hazel eyes, arched brows and left-eye mole, wears a soft teal sweater; Elias, tall and broad with deep-set brown eyes, thick brows and cleft chin, wears an indigo work shirt; June, short and compact with round dark eyes, high brows and left-cheek dimple, wears a sunflower cardigan; Rosa, petite and sturdy with hooded gray eyes, rounded cheeks and smile lines, wears an olive house dress; intimate 16:9 eye-level kitchen portrait around their familiar table — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 14,
+      "file_name": "shot_0014.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0013.png",
+      "narration": "carrying something way too heavy.",
+      "prompt": "STYLIZED 3D ANIMATED STORYBOOK REALISM WITH SOFT PAINTERLY TEXTURES, Mara's almond eyes and left-eye mole, Elias's cleft chin, June's cheek dimple, Rosa's hooded gray eyes — hard cut to a low 16:9 side angle as the kitchen table bows under towering legal boxes, security devices and gold-toned ledgers while all four family members brace its edges together — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 15,
+      "file_name": "shot_0015.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Would you actually want this life?",
+      "prompt": "ON-SCREEN IDEA — symbolic 16:9 composition contrasting a glittering gold mountain trapped inside a locked cage with an open doorway leading toward the modest kitchen; centered text reads \"Would you actually want this life?\" in Comic Sans MS, stylized 3D animated storybook realism with soft painterly textures — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 16,
+      "file_name": "shot_0016.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0015.png",
+      "narration": "Comment below.",
+      "prompt": "ON-SCREEN IDEA — hard cut to a tighter 16:9 graphic view where the cage and doorway recede into painterly silhouettes, a large empty speech bubble rises center frame, and \"Comment below.\" appears in Comic Sans MS, stylized 3D animated storybook realism with soft painterly textures — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    }
+  ]
+}

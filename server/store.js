@@ -24,7 +24,7 @@ export const DEFAULT_SETTINGS = {
   chunkWords: 400,
   imagesPerRun: 40,
   driveFolder: '',
-  whisperEngine: 'whisperx',
+  whisperEngine: 'openai',
   language: 'en',
   fps: 30,
   motion: 'kenburns',

@@ -10,6 +10,15 @@ const MOVES = [
   { fromScale: 1.02, toScale: 1.09, fromX: 0, toX: 0, fromY: 1.5, toY: -1.5 }, // push in + rise
 ];
 
+// Share of each move's full travel that is used; 0.6 = 40% slower than the original presets.
+const MOTION_SPEED = 0.6;
+// Shrink a from→to range around its midpoint so the image stays centred.
+const travel = (from, to, p) => {
+  const mid = (from + to) / 2;
+  const half = ((to - from) / 2) * MOTION_SPEED;
+  return mid - half + 2 * half * p;
+};
+
 const Still = ({ src, index, durationInFrames, motion, fadeIn }) => {
   const frame = useCurrentFrame();
   const m = MOVES[index % MOVES.length];
@@ -18,9 +27,9 @@ const Still = ({ src, index, durationInFrames, motion, fadeIn }) => {
   const p = animate
     ? interpolate(frame, [0, durationInFrames], [0, 1], { extrapolateRight: 'clamp', easing: Easing.inOut(Easing.sin) })
     : 0;
-  const scale = animate ? m.fromScale + (m.toScale - m.fromScale) * p : 1;
-  const x = animate ? m.fromX + (m.toX - m.fromX) * p : 0;
-  const y = animate ? m.fromY + (m.toY - m.fromY) * p : 0;
+  const scale = animate ? travel(m.fromScale, m.toScale, p) : 1;
+  const x = animate ? travel(m.fromX, m.toX, p) : 0;
+  const y = animate ? travel(m.fromY, m.toY, p) : 0;
   const opacity = fadeIn > 0 ? interpolate(frame, [0, fadeIn], [0, 1], { extrapolateRight: 'clamp' }) : 1;
   return (
     <AbsoluteFill style={{ opacity }}>
