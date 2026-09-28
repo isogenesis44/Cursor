@@ -32,9 +32,9 @@ Remotion is free for individuals and companies with up to 3 employees; larger co
    - Runs try to end just before a new scene, so an edit shot rarely has to continue from yesterday's image. Per-run JSON files are there if one big file is too much to attach.
 3. **Images**: drop the Google Drive download (`.zip`) or up to 500 loose images. Files are matched by the shot number in the name (`shot_0012.png`, `12.png`, `image 12.png`). Files without a shot number (e.g. `ChatGPT Image … 08_15_32 AM.png`) fill the empty shots oldest-first. Any single shot can be replaced from the grid.
 4. **Audio sync**: upload the narration, then click **Transcribe & sync**.
-   - **OpenAI Whisper** (`openai/whisper`) is the default: it gives sentence-level timing, and word times are spread inside each sentence, which lands every cut on its sentence reliably. WhisperX and incredibly-fast-whisper (word timestamps) are available as alternatives.
+   - **WhisperX** (`victor-upmeet/whisperx`) is the default: its forced alignment gives each word its own start time (measured within ~0.03s of the voice onset on real narration). If it matches the script below 90%, the app automatically retries with OpenAI Whisper (sentence timing only) and keeps whichever matches better. The script is never sent to Whisper as a prompt; that made it invent text.
    - The script words are aligned to the heard words (banded Needleman–Wunsch alignment, tolerant of misheard words, "12" vs "twelve", filler words). Each image starts on the first word of its narration and holds until the next shot's first word. The first image covers any intro silence and the last one runs to the end of the audio.
-   - **Cut lead** moves every cut slightly before its word (editors often use 0.03–0.08s). **Import Whisper JSON** lets you skip Replicate.
+   - **Cut lead** moves every cut slightly before its word (default 0.08s, about 2 frames; editors often use 0.03–0.1s). **Import Whisper JSON** lets you skip Replicate.
    - The in-page preview plays the audio and swaps the images live.
 5. **Render**: pick FPS, a subtle camera move (Ken Burns, off automatically on flash cuts under 0.6s) or static images, and hard cut or quick dissolve. Missing images hold the previous frame.
 

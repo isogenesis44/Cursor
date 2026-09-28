@@ -328,6 +328,8 @@ function computeTimeline(p) {
   p.alignStats = stats;
 }
 
+const WHISPERX_MIN_MATCH = 0.9;
+
 app.post('/api/projects/:id/transcribe', wrap(async (req, res) => {
   const p = getProject(req.params.id);
   if (!p.audio) throw Object.assign(new Error('Upload the narration audio first.'), { status: 400 });
@@ -337,14 +339,24 @@ app.post('/api/projects/:id/transcribe', wrap(async (req, res) => {
   res.json(view(p));
   (async () => {
     try {
-      const result = await transcribe(projectDir(p.id, 'audio', p.audio.file), {
-        engine: p.settings.whisperEngine,
+      const audioFile = projectDir(p.id, 'audio', p.audio.file);
+      const run = (engine) => transcribe(audioFile, {
+        engine,
         language: p.settings.language || undefined,
-        onStatus: (pred) => setJob(p, 'transcribe', { message: `Whisper: ${pred.status}…` }),
+        onStatus: (pred) => setJob(p, 'transcribe', { message: `${engine}: ${pred.status}…` }),
       });
+      const matchRate = (words) => (p.plan ? alignShots(p.plan.shots, words, { duration: p.audio?.duration, fps: p.settings.fps }).stats.matchRate : 1);
+      let result = await run(p.settings.whisperEngine);
+      // WhisperX gives word-accurate cut times, but if it mishears the recording badly,
+      // fall back to OpenAI Whisper and keep whichever matches the script better.
+      if (result.engine === 'whisperx' && matchRate(result.words) < WHISPERX_MIN_MATCH) {
+        setJob(p, 'transcribe', { message: 'WhisperX matched the script poorly, trying OpenAI Whisper…' });
+        const fallback = await run('openai');
+        if (matchRate(fallback.words) > matchRate(result.words)) result = fallback;
+      }
       p.transcript = { engine: result.engine, model: result.model, words: result.words };
       if (p.plan) computeTimeline(p);
-      setJob(p, 'transcribe', { status: 'done', progress: 1, message: `Transcribed ${result.words.length} words${p.alignStats ? `, ${Math.round(p.alignStats.matchRate * 100)}% matched to the script` : ''}.` });
+      setJob(p, 'transcribe', { status: 'done', progress: 1, message: `Transcribed ${result.words.length} words with ${result.engine}${p.alignStats ? `, ${Math.round(p.alignStats.matchRate * 100)}% matched to the script` : ''}.` });
     } catch (err) {
       console.error(err);
       setJob(p, 'transcribe', { status: 'error', message: err.message });

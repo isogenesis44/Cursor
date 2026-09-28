@@ -24,13 +24,13 @@ export const DEFAULT_SETTINGS = {
   chunkWords: 400,
   imagesPerRun: 40,
   driveFolder: '',
-  whisperEngine: 'openai',
+  whisperEngine: 'whisperx',
   language: 'en',
   fps: 30,
   motion: 'kenburns',
   transition: 'cut',
   transitionFrames: 4,
-  leadSeconds: 0,
+  leadSeconds: 0.08, // ~2 frames early, like an editor's cut
 };
 
 function load(id) {

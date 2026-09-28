@@ -2,14 +2,14 @@
 import { runModel, uploadFile } from '../replicate.js';
 
 export const WHISPER_MODELS = {
-  whisperx: 'victor-upmeet/whisperx', // word-level timestamps via forced alignment (most accurate)
+  whisperx: 'victor-upmeet/whisperx', // word-level timestamps via forced alignment (most accurate, default)
   fast: 'vaibhavs10/incredibly-fast-whisper', // word-level timestamps, very fast
-  openai: 'openai/whisper', // segment-level only; words are interpolated inside each segment
+  openai: 'openai/whisper', // segment-level only; words are interpolated inside each segment (fallback)
 };
 
 const AUDIO_TYPES = { mp3: 'audio/mpeg', wav: 'audio/wav', m4a: 'audio/mp4', aac: 'audio/aac', ogg: 'audio/ogg', flac: 'audio/flac', webm: 'audio/webm' };
 
-export async function transcribe(audioPath, { engine = 'openai', language, onStatus } = {}) {
+export async function transcribe(audioPath, { engine = 'whisperx', language, onStatus } = {}) {
   const ext = audioPath.split('.').pop().toLowerCase();
   const url = await uploadFile(audioPath, AUDIO_TYPES[ext] || 'application/octet-stream');
   const model = process.env[`WHISPER_MODEL_${engine.toUpperCase()}`] || WHISPER_MODELS[engine];
