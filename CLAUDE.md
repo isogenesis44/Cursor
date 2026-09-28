@@ -28,7 +28,7 @@ The narration audio comes later, either in the Drive image folder or attached in
 6. POST `/transcribe` (default engine `openai/whisper`), check `alignStats.matchRate` (expect 90%+), then POST `/render`.
    Save the Whisper JSON to `projects/<slug>/whisper.json` (restore later with `/transcript/import`).
 7. **Deliver the full-quality MP4 to Google Drive** (same folder as the images, named `<Title>.mp4`). The normal Drive upload is
-   capped at 5MB, so use this route (tested up to an 886MB, 11-minute video; checksum verified):
+   capped at 5MB, so use this route (tested up to a 1.14GB, 12-minute video; checksum verified):
    a. In COMPOSIO_REMOTE_WORKBENCH, request a presigned upload link and print only `key` and `upload_url` (never print the access key):
       ```python
       import requests, os
@@ -37,9 +37,13 @@ The narration audio comes later, either in the Drive image folder or attached in
                         headers={"x-session-access-key": os.environ["COMPOSIO_WORKBENCH_ACCESS_KEY"], "Content-Type": "application/json"})
       r.raise_for_status(); j = r.json(); print("KEY=" + j["key"]); print("UPLOAD=" + j["upload_url"])
       ```
-   b. From this machine: `curl -X PUT -H "Content-Type: video/mp4" --data-binary @<render>.mp4 '<upload_url>'` (expect 200; link lasts 1 hour).
+   b. From this machine: `curl -H "Content-Type: video/mp4" -T <render>.mp4 '<upload_url>'` (expect 200; link lasts 1 hour).
+      Use `-T` (streams from disk), not `--data-binary @file`, which loads the file into memory and fails around 1GB.
    c. GOOGLEDRIVE_RESUMABLE_UPLOAD with `file_to_upload: {name, mimetype: "video/mp4", s3key: <key>}`, `folder_to_upload_to: <folder id>`,
       `chunkSize: 33554432`. Then GOOGLEDRIVE_GET_FILE_METADATA and compare `md5Checksum` with `md5sum` of the local file.
+   Composio calls time out after 60s on the client side, but the work keeps running: after a timeout on the image downloads or
+   the Drive upload, check what finished (file sizes in the sandbox; GOOGLEDRIVE_FIND_FILE in the folder) before retrying, so
+   nothing is duplicated. For big image sets, start the downloads and check progress in a separate call.
    Give the user the Drive link. Only if this fails, fall back to SendUserFile (30MB cap): re-encode with Remotion's bundled ffmpeg
    (`node_modules/@remotion/compositor-linux-x64-gnu/ffmpeg`, run with `LD_LIBRARY_PATH` set to that folder;
    `-c:v libx264 -crf 23 -maxrate 4M -bufsize 8M -c:a copy`).
