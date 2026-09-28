@@ -41,6 +41,9 @@ The narration audio comes later, either in the Drive image folder or attached in
       Use `-T` (streams from disk), not `--data-binary @file`, which loads the file into memory and fails around 1GB.
    c. GOOGLEDRIVE_RESUMABLE_UPLOAD with `file_to_upload: {name, mimetype: "video/mp4", s3key: <key>}`, `folder_to_upload_to: <folder id>`,
       `chunkSize: 33554432`. Then GOOGLEDRIVE_GET_FILE_METADATA and compare `md5Checksum` with `md5sum` of the local file.
+   Composio calls time out after 60s on the client side, but the work keeps running: after a timeout on the image downloads or
+   the Drive upload, check what finished (file sizes in the sandbox; GOOGLEDRIVE_FIND_FILE in the folder) before retrying, so
+   nothing is duplicated. For big image sets, start the downloads and check progress in a separate call.
    Give the user the Drive link. Only if this fails, fall back to SendUserFile (30MB cap): re-encode with Remotion's bundled ffmpeg
    (`node_modules/@remotion/compositor-linux-x64-gnu/ffmpeg`, run with `LD_LIBRARY_PATH` set to that folder;
    `-c:v libx264 -crf 23 -maxrate 4M -bufsize 8M -c:a copy`).
