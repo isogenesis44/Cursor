@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { alignShots, alignTokens } from '../server/sync/align.js';
+import { alignShots, alignTokens, consensusWords } from '../server/sync/align.js';
 import { normalizeTranscript } from '../server/sync/transcribe.js';
 
 test('alignTokens handles insertions, deletions and substitutions', () => {
@@ -34,6 +34,38 @@ test('alignShots leaves out closing shots the narrator never recorded', () => {
   const { timeline, stats } = alignShots(shots, words, { duration: 3, fps: 30 });
   assert.deepEqual(timeline.map((t) => [t.shot, t.start, t.end]), [[1, 0, 1.3], [2, 1.3, 3]]);
   assert.equal(stats.unspokenShots, 2);
+});
+
+test('alignShots leaves out a skipped line in the middle instead of flashing it', () => {
+  const shots = [
+    { text: 'He says,' }, { text: 'Old is not the problem.' }, { text: 'Visible is the problem.' },
+    { text: 'People hate old cars.' }, { text: 'You have nothing to say.' },
+  ];
+  const words = [
+    { word: 'He', start: 0.2, end: 0.4 }, { word: 'says,', start: 0.4, end: 0.8 },
+    { word: 'You', start: 0.9, end: 1.2 }, { word: 'have', start: 1.2, end: 1.4 },
+    { word: 'nothing', start: 1.4, end: 1.8 }, { word: 'to', start: 1.8, end: 1.9 }, { word: 'say.', start: 1.9, end: 2.3 },
+  ];
+  const { timeline, stats } = alignShots(shots, words, { duration: 3, fps: 30 });
+  assert.deepEqual(timeline.map((t) => [t.shot, t.start, t.end]), [[1, 0, 0.9], [5, 0.9, 3]]);
+  assert.equal(stats.unspokenShots, 3);
+});
+
+test('consensusWords takes the cross-check where WhisperX skipped or misplaced words', () => {
+  const shots = [{ text: 'He says,' }, { text: 'Old is the problem.' }, { text: 'You nod.' }];
+  // WhisperX dropped the quote and stretched "You nod." over its audio (at 1.0s instead of 5.0s).
+  const whisperx = [{ word: 'He', start: 0.2 }, { word: 'says,', start: 0.4 }, { word: 'You', start: 1.0 }, { word: 'nod.', start: 1.3 }];
+  const openai = [
+    { word: 'He', start: 0.1 }, { word: 'says,', start: 0.3 }, { word: 'Old', start: 1.0 }, { word: 'is', start: 1.4 },
+    { word: 'the', start: 1.6 }, { word: 'problem.', start: 1.8 }, { word: 'You', start: 5.0 }, { word: 'nod.', start: 5.3 },
+  ];
+  const { words, fromSecondary } = consensusWords(shots, whisperx, openai);
+  assert.deepEqual(words.map((w) => [w.word, w.start]), [
+    ['he', 0.2], ['says', 0.4], ['old', 1.0], ['is', 1.4], ['the', 1.6], ['problem', 1.8], ['you', 5.0], ['nod', 5.3],
+  ]);
+  assert.equal(fromSecondary, 6);
+  const { timeline } = alignShots(shots, words, { duration: 6, fps: 30 });
+  assert.deepEqual(timeline.map((t) => [t.shot, t.start]), [[1, 0], [2, 1], [3, 5]]);
 });
 
 test('alignShots survives misheard words and keeps time monotonic', () => {

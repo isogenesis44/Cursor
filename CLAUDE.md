@@ -25,11 +25,13 @@ The narration audio comes later, either in the Drive image folder or attached in
    GOOGLEDRIVE_FIND_FILE, run GOOGLEDRIVE_DOWNLOAD_FILE + fetch the s3url with a ThreadPoolExecutor(16) (wrap it in
    `contextlib.redirect_stdout` — the helper prints every response), zip ~43 images per ZIP_STORED archive, PUT each zip to a
    presigned link (step 7a) and `curl -L` its `download_url` here. For a few images, GOOGLEDRIVE_DOWNLOAD_FILE → fetch the s3url.
-6. POST `/transcribe` (default engine WhisperX, word-accurate; it falls back to `openai/whisper` by itself if WhisperX matches
-   the script below 90%), check `alignStats.matchRate` (expect 90%+) and that the job message names the engine, then POST `/render`.
-   Default cut lead is 0.08s (about 2 frames early). Measured on the Status video: cuts land within ~0.13s of the voice
-   (before, with `openai/whisper`: median 0.23s, worst 1.8s off).
-   Save the Whisper JSON to `projects/<slug>/whisper.json` (restore later with `/transcript/import`).
+6. POST `/transcribe`. With the default engine it runs WhisperX (word-accurate) and OpenAI Whisper side by side and times each
+   script word from WhisperX, switching to OpenAI Whisper only where WhisperX skipped the word or is >2.5s off (WhisperX sometimes
+   drops a sentence and stretches the next ones over its audio). Lines neither engine heard are left out instead of flashing by.
+   Check the job message (how many word times came from OpenAI Whisper) and `alignStats` (`unspokenShots`, very short shots),
+   then POST `/render`. Default cut lead is 0.08s (about 2 frames early). Measured: cuts land within ~0.1s of the voice
+   (before, with `openai/whisper` alone: median 0.23s, worst 1.8s off).
+   Save `{words, altWords}` from the project's transcript to `projects/<slug>/whisper.json` (restore later with `/transcript/import`).
 7. **Deliver the full-quality MP4 to Google Drive** (same folder as the images, named `<Title>.mp4`). The normal Drive upload is
    capped at 5MB, so use this route (tested up to a 1.14GB, 12-minute video; checksum verified):
    a. In COMPOSIO_REMOTE_WORKBENCH, request a presigned upload link and print only `key` and `upload_url` (never print the access key):

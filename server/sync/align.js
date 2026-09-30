@@ -118,6 +118,53 @@ export function alignTokens(a, b) {
  * { timeline: [{ shot, start, end, duration, matched }], stats }
  * options: { duration (audio length s), fps, leadSeconds (show image slightly before the word), minSeconds }
  */
+const SKIPPED_LINE_SECONDS = 0.3;
+const MAX_DISAGREEMENT_SECONDS = 2.5;
+
+/** Time of each script token in one transcript (null where not heard), never going backwards. */
+function tokenTimes(scriptTokens, words) {
+  const wordTokens = [];
+  const wordIndex = [];
+  words.forEach((w, wi) => {
+    for (const t of tokenize(w.word)) { wordTokens.push(t); wordIndex.push(wi); }
+  });
+  const { map } = alignTokens(scriptTokens, wordTokens);
+  let last = -Infinity;
+  return map.map((j) => {
+    const t = j >= 0 ? words[wordIndex[j]].start : null;
+    if (t == null || t < last) return null;
+    last = t;
+    return t;
+  });
+}
+
+/**
+ * Combine two transcripts word by word against the script. WhisperX (primary) is word-accurate,
+ * but now and then its transcript drops a sentence and its forced alignment then stretches the
+ * next words over that audio. Where it is missing a word, or disagrees with the secondary
+ * transcript by more than MAX_DISAGREEMENT_SECONDS, the secondary time is used instead.
+ * Returns timed script words (only words at least one engine heard) plus counts.
+ */
+export function consensusWords(shots, primary, secondary, { maxDisagreement = MAX_DISAGREEMENT_SECONDS } = {}) {
+  const scriptTokens = shots.flatMap((s) => tokenize(s.text));
+  const a = tokenTimes(scriptTokens, primary);
+  const b = tokenTimes(scriptTokens, secondary);
+  const words = [];
+  let fromSecondary = 0;
+  let last = -Infinity;
+  scriptTokens.forEach((token, i) => {
+    let t = a[i];
+    if (b[i] != null && (t == null || Math.abs(t - b[i]) > maxDisagreement)) {
+      t = b[i];
+      fromSecondary++;
+    }
+    if (t == null || t < last) return;
+    last = t;
+    words.push({ word: token, start: t, end: null });
+  });
+  return { words, fromSecondary, total: scriptTokens.length };
+}
+
 export function alignShots(shots, words, { duration, fps = 30, leadSeconds = 0, minSeconds } = {}) {
   const tokenShot = [];
   const scriptTokens = [];
@@ -194,12 +241,20 @@ export function alignShots(shots, words, { duration, fps = 30, leadSeconds = 0, 
     const floor = starts[si - 1] + minDur;
     if (starts[si] === null || starts[si] < floor) starts[si] = floor;
   }
+  // A shot with no heard words that gets squeezed to almost nothing is a line the narrator
+  // skipped: leave it out so it doesn't flash by, and let the previous image hold instead.
+  const keep = shots.map((_, si) => si < spokenShots);
+  for (let si = 1; si < spokenShots; si++) {
+    const next = si + 1 < spokenShots ? starts[si + 1] : audioEnd;
+    if (heardTokens[si] === 0 && next - starts[si] < SKIPPED_LINE_SECONDS) keep[si] = false;
+  }
+  const kept = shots.map((_, si) => si).filter((si) => keep[si]);
   // Snap to frames.
   const snap = (t) => +(Math.round(t * fps) / fps).toFixed(4);
-  const end = Math.max(snap(audioEnd), snap(starts[spokenShots - 1] + minDur));
-  const timeline = shots.slice(0, spokenShots).map((_, si) => {
+  const end = Math.max(snap(audioEnd), snap(starts[kept.at(-1)] + minDur));
+  const timeline = kept.map((si, k) => {
     const start = snap(starts[si]);
-    const stop = si + 1 < spokenShots ? snap(starts[si + 1]) : end;
+    const stop = k + 1 < kept.length ? snap(starts[kept[k + 1]]) : end;
     return {
       shot: si + 1,
       start,
@@ -216,7 +271,7 @@ export function alignShots(shots, words, { duration, fps = 30, leadSeconds = 0, 
       matchedWords: exactCount,
       matchRate: n ? +(exactCount / n).toFixed(3) : 0,
       totalSeconds: end,
-      unspokenShots: shots.length - spokenShots,
+      unspokenShots: shots.length - kept.length,
     },
   };
 }
