@@ -39,6 +39,9 @@ The narration audio comes later, either in the Drive image folder or attached in
    Check the job message (how many word times came from OpenAI Whisper) and `alignStats` (`unspokenShots`, very short shots),
    then POST `/render`. Default cut lead is 0.08s (about 2 frames early). Measured: cuts land within ~0.1s of the voice
    (before, with `openai/whisper` alone: median 0.23s, worst 1.8s off).
+   **Mixed-language scripts** (e.g. English narration teaching French): set the project `language` to the non-English language
+   (`fr`). With `en`, WhisperX TRANSLATES the foreign lines into English and they stop matching the script (Moussa: 77% match);
+   with `fr` it transcribes both languages as spoken (99%).
    Save `{words, altWords}` from the project's transcript to `projects/<slug>/whisper.json` (restore later with `/transcript/import`).
 8. **Deliver the full-quality MP4 to Google Drive** (same folder as the images, named `<Title>.mp4`). The normal Drive upload is
    capped at 5MB, so use this route (tested up to a 1.14GB, 12-minute video; checksum verified):
