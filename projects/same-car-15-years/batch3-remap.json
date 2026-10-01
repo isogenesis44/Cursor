@@ -1,0 +1,26 @@
+{
+ "note": "Batch 3 zip (status-anxiety-batch-3.zip) is shifted. Key = script shot, value = file number inside that zip that actually shows it. Shots 81-93 have no usable image in it.",
+ "remap": {
+  "77": 84,
+  "78": 85,
+  "79": 86,
+  "80": 87,
+  "94": 91,
+  "95": 92,
+  "96": 93,
+  "97": 94,
+  "98": 95,
+  "99": 96,
+  "100": 97,
+  "101": 98,
+  "102": 99,
+  "103": 100,
+  "104": 102,
+  "105": 103,
+  "106": 104,
+  "107": 105,
+  "108": 106,
+  "109": 107,
+  "110": 108
+ }
+}
