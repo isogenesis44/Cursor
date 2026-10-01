@@ -19,20 +19,28 @@ The narration audio comes later, either in the Drive image folder or attached in
    `projects/<slug>/shot-plan.json` (from `/export/plan.json`), `projects/<slug>/settings.json`, and the style image, then commit and push.
    A later session restores it with `POST /api/projects/:id/plan/import` (after PATCHing the script).
 4. Send the user the ChatGPT job JSON (`/export/chatgpt.json`) and instructions (`/export/instructions.txt`) with SendUserFile.
-5. When the user says the images are ready, find the Drive folder, download every `shot_####.png` plus the narration audio,
+5. **Review the images before using them** (the user asked for this step). Images may arrive as loose `shot_####.png` or as zips
+   (`*-batch-N.zip`, `*-batch-N-updated.zip`); for each shot always use the NEWEST version. Check: all shots present, no byte-identical
+   duplicates (`md5sum`; ChatGPT has repeated and shifted a whole batch before), then look at every image in 2x3 contact sheets
+   (Pillow) against its narration line and planned scene from `shot-plan.json`: right scene/speaker, recurring characters and the
+   car stay consistent, numbers/text correct, no AI glitches or style-image leftovers. Write `projects/<slug>/review.md` with
+   what's wrong per shot and a ready-to-paste ChatGPT prompt (original prompt + CORRECTION), send it with a grid of the flagged
+   images, and wait: the user regenerates or says ignore. Good images in the wrong slots can be re-mapped instead of regenerated;
+   save the mapping in `projects/<slug>/`. Only delete old files in Drive if the user asks.
+6. When the images are ready, find the Drive folder, download every `shot_####.png` plus the narration audio,
    then upload the images to `/api/projects/:id/images` (batches of ~25) and the audio to `/api/projects/:id/audio`.
    For more than ~20 images, do the downloads in COMPOSIO_REMOTE_WORKBENCH (214 images took ~40s): list the folder with
    GOOGLEDRIVE_FIND_FILE, run GOOGLEDRIVE_DOWNLOAD_FILE + fetch the s3url with a ThreadPoolExecutor(16) (wrap it in
    `contextlib.redirect_stdout` — the helper prints every response), zip ~43 images per ZIP_STORED archive, PUT each zip to a
-   presigned link (step 7a) and `curl -L` its `download_url` here. For a few images, GOOGLEDRIVE_DOWNLOAD_FILE → fetch the s3url.
-6. POST `/transcribe`. With the default engine it runs WhisperX (word-accurate) and OpenAI Whisper side by side and times each
+   presigned link (step 8a) and `curl -L` its `download_url` here. For a few images, GOOGLEDRIVE_DOWNLOAD_FILE → fetch the s3url.
+7. POST `/transcribe`. With the default engine it runs WhisperX (word-accurate) and OpenAI Whisper side by side and times each
    script word from WhisperX, switching to OpenAI Whisper only where WhisperX skipped the word or is >2.5s off (WhisperX sometimes
    drops a sentence and stretches the next ones over its audio). Lines neither engine heard are left out instead of flashing by.
    Check the job message (how many word times came from OpenAI Whisper) and `alignStats` (`unspokenShots`, very short shots),
    then POST `/render`. Default cut lead is 0.08s (about 2 frames early). Measured: cuts land within ~0.1s of the voice
    (before, with `openai/whisper` alone: median 0.23s, worst 1.8s off).
    Save `{words, altWords}` from the project's transcript to `projects/<slug>/whisper.json` (restore later with `/transcript/import`).
-7. **Deliver the full-quality MP4 to Google Drive** (same folder as the images, named `<Title>.mp4`). The normal Drive upload is
+8. **Deliver the full-quality MP4 to Google Drive** (same folder as the images, named `<Title>.mp4`). The normal Drive upload is
    capped at 5MB, so use this route (tested up to a 1.14GB, 12-minute video; checksum verified):
    a. In COMPOSIO_REMOTE_WORKBENCH, request a presigned upload link and print only `key` and `upload_url` (never print the access key):
       ```python
