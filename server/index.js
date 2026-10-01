@@ -15,7 +15,7 @@ const { normalizeShot, normalizeCharacter, reconcileCoverage, enforceStructure, 
 const { buildImagePrompt } = await import('./director/imagePrompts.js');
 const { buildChatGptJob, kickoffMessage, planRuns, ASPECTS } = await import('./export/chatgpt.js');
 const { transcribe, normalizeTranscript } = await import('./sync/transcribe.js');
-const { alignShots } = await import('./sync/align.js');
+const { alignShots, consensusWords } = await import('./sync/align.js');
 const { renderVideo, timelineToProps } = await import('./render/render.js');
 const replicate = await import('./replicate.js');
 const { shotNumberFromName } = await import('./images.js');
@@ -319,7 +319,13 @@ app.post('/api/projects/:id/audio', upload.single('file'), wrap(async (req, res)
 }));
 
 function computeTimeline(p) {
-  const { timeline, stats } = alignShots(p.plan.shots, p.transcript.words, {
+  let words = p.transcript.words;
+  if (p.transcript.altWords?.length) {
+    const c = consensusWords(p.plan.shots, words, p.transcript.altWords);
+    words = c.words;
+    p.transcript.fromSecondary = c.fromSecondary;
+  }
+  const { timeline, stats } = alignShots(p.plan.shots, words, {
     duration: p.audio?.duration,
     fps: p.settings.fps,
     leadSeconds: p.settings.leadSeconds,
@@ -327,8 +333,6 @@ function computeTimeline(p) {
   p.timeline = timeline;
   p.alignStats = stats;
 }
-
-const WHISPERX_MIN_MATCH = 0.9;
 
 app.post('/api/projects/:id/transcribe', wrap(async (req, res) => {
   const p = getProject(req.params.id);
@@ -345,18 +349,29 @@ app.post('/api/projects/:id/transcribe', wrap(async (req, res) => {
         language: p.settings.language || undefined,
         onStatus: (pred) => setJob(p, 'transcribe', { message: `${engine}: ${pred.status}…` }),
       });
-      const matchRate = (words) => (p.plan ? alignShots(p.plan.shots, words, { duration: p.audio?.duration, fps: p.settings.fps }).stats.matchRate : 1);
-      let result = await run(p.settings.whisperEngine);
-      // WhisperX gives word-accurate cut times, but if it mishears the recording badly,
-      // fall back to OpenAI Whisper and keep whichever matches the script better.
-      if (result.engine === 'whisperx' && matchRate(result.words) < WHISPERX_MIN_MATCH) {
-        setJob(p, 'transcribe', { message: 'WhisperX matched the script poorly, trying OpenAI Whisper…' });
-        const fallback = await run('openai');
-        if (matchRate(fallback.words) > matchRate(result.words)) result = fallback;
+      let result;
+      let altWords = null;
+      if (p.settings.whisperEngine === 'whisperx') {
+        // Run both engines side by side: WhisperX for word-accurate timing, OpenAI Whisper as a
+        // cross-check for the stretches WhisperX skips or misplaces (see consensusWords).
+        const [wx, oa] = await Promise.allSettled([run('whisperx'), run('openai')]);
+        if (wx.status === 'fulfilled') {
+          result = wx.value;
+          if (oa.status === 'fulfilled') altWords = oa.value.words;
+          else console.warn('OpenAI Whisper cross-check failed:', oa.reason?.message);
+        } else if (oa.status === 'fulfilled') {
+          console.warn('WhisperX failed, using OpenAI Whisper:', wx.reason?.message);
+          result = oa.value;
+        } else {
+          throw wx.reason;
+        }
+      } else {
+        result = await run(p.settings.whisperEngine);
       }
-      p.transcript = { engine: result.engine, model: result.model, words: result.words };
+      p.transcript = { engine: result.engine, model: result.model, words: result.words, ...(altWords ? { altWords } : {}) };
       if (p.plan) computeTimeline(p);
-      setJob(p, 'transcribe', { status: 'done', progress: 1, message: `Transcribed ${result.words.length} words with ${result.engine}${p.alignStats ? `, ${Math.round(p.alignStats.matchRate * 100)}% matched to the script` : ''}.` });
+      const fixed = p.transcript.fromSecondary ? `, ${p.transcript.fromSecondary} word times taken from OpenAI Whisper where WhisperX skipped or misplaced them` : '';
+      setJob(p, 'transcribe', { status: 'done', progress: 1, message: `Transcribed ${result.words.length} words with ${result.engine}${altWords ? ' (cross-checked with OpenAI Whisper)' : ''}${fixed}${p.alignStats ? `, ${Math.round(p.alignStats.matchRate * 100)}% of the script heard` : ''}.` });
     } catch (err) {
       console.error(err);
       setJob(p, 'transcribe', { status: 'error', message: err.message });
@@ -369,7 +384,9 @@ app.post('/api/projects/:id/transcript/import', wrap(async (req, res) => {
   const p = getProject(req.params.id);
   const words = normalizeTranscript(req.body);
   if (!words.length) throw Object.assign(new Error('Could not find timed words/segments in that JSON.'), { status: 400 });
-  p.transcript = { engine: 'imported', model: null, words };
+  // A saved transcript may carry the OpenAI Whisper cross-check as `altWords`.
+  const altWords = Array.isArray(req.body?.altWords) ? normalizeTranscript({ words: req.body.altWords }) : [];
+  p.transcript = { engine: 'imported', model: null, words, ...(altWords.length ? { altWords } : {}) };
   if (p.plan) computeTimeline(p);
   await save(p);
   res.json(view(p));
