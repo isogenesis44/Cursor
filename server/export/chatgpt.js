@@ -53,9 +53,10 @@ export function kickoffMessage(project, runs) {
       ? `7. STYLE LOCK: the attached style reference image is the SOLE style authority and overrides every other style word. ${STYLE_REFERENCE_RULE}`
       : `7. STYLE LOCK: every image uses this style, which overrides anything else: ${s.style || '(see style_lock in the JSON)'}.`,
     `8. ${COMIC_SANS_RULE}`,
-    `9. Save each image to "${folder}" as a PNG named EXACTLY its "file_name" (e.g. shot_0001.png).`,
-    '10. If an image fails, retry it once; if it still fails, note it and continue with the next number.',
-    '11. End each run with a short report: files saved this run, any failures, and the next file_name to make. When all images exist, say "ALL IMAGES COMPLETE".',
+    '9. CHECK BEFORE SAVING — compare the finished image with its prompt and regenerate it once if any of these fail: (a) every quoted word is spelled exactly as in the prompt, with nothing extra (no taglines, logos or invented labels); (b) each named character has the face, build and outfit the prompt gives them, and a different person is never drawn with the main character\'s face; (c) screens, callers, signs, plaques, money and vehicles match the prompt and the story (right caller name, local currency, the stated car); (d) it is a new image, not a copy of an earlier file_name.',
+    `10. Save each image to "${folder}" as a PNG named EXACTLY its "file_name" (e.g. shot_0001.png). Save loose PNGs, not zip files, and never save one image under another number.`,
+    '11. If an image fails, retry it once; if it still fails, note it and continue with the next number.',
+    '12. End each run with a short report: files saved this run, any failures, and the next file_name to make. When all images exist, say "ALL IMAGES COMPLETE".',
   ].join('\n');
 }
 
