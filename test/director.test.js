@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { reconcileCoverage, coverageMatches, enforceStructure, normalizeShot, isWeakDirection, extractJson } from '../server/director/validate.js';
 import { splitScript, buildPlanningPrompt } from '../server/director/planner.js';
-import { buildImagePrompt, EDIT_CONTINUITY_RULE, OFF_SCREEN_RULE, COMIC_SANS_RULE, STYLE_REFERENCE_RULE } from '../server/director/imagePrompts.js';
+import { buildImagePrompt, EDIT_CONTINUITY_RULE, OFF_SCREEN_RULE, COMIC_SANS_RULE, STYLE_REFERENCE_RULE, EXACT_TEXT_RULE, STORY_FACTS_RULE } from '../server/director/imagePrompts.js';
 import { buildChatGptJob, planRuns } from '../server/export/chatgpt.js';
 import { shotNumberFromName } from '../server/images.js';
 
@@ -92,7 +92,7 @@ test('image prompts follow the engine assembly rules', () => {
   assert.ok(k.startsWith('stick figure, tall slight hunch, narrow eyes, dark grey lines, red accent — Daniel at his desk'));
   assert.ok(k.includes(COMIC_SANS_RULE) && k.includes(STYLE_REFERENCE_RULE));
   const e = buildImagePrompt(plan, 1, { styleReference: true });
-  assert.ok(e.startsWith('stick figure, narrow eyes — close insert'));
+  assert.ok(e.startsWith('stick figure, tall slight hunch, narrow eyes, wearing dark grey lines, red accent — close insert'));
   assert.ok(e.includes(EDIT_CONTINUITY_RULE));
   assert.ok(!e.includes(STYLE_REFERENCE_RULE));
   const off = buildImagePrompt(plan, 2, {});
@@ -101,6 +101,26 @@ test('image prompts follow the engine assembly rules', () => {
   const w = buildImagePrompt(plan, 3, {});
   assert.ok(w.includes('for THIS scene only, wearing olive hoodie instead of the usual outfit'));
   assert.ok(!w.includes('dark grey lines'));
+});
+
+test('image prompts lock outfits in edits, describe other named characters, and add text/story rules', () => {
+  const p2 = {
+    characters: [
+      { name: 'Moussa', visual_persona: { art_style: 'painterly', physical_description: 'slim boy', facial_features: 'tight curls', color_palette: 'coral T-shirt' } },
+      { name: 'Marcus', visual_persona: { art_style: 'painterly', physical_description: 'tall sturdy man', facial_features: 'trimmed goatee', color_palette: 'black beanie, reflective jacket' } },
+    ],
+    shots: [
+      { type: 'keyframe', text: 'He goes out.', character_name: 'Moussa', character_visibility: 'on_screen', scene_description: 'Moussa at night', wardrobe_override: 'grey hoodie' },
+      { type: 'edit', text: 'Marcus checks the hood.', character_name: 'Moussa', character_visibility: 'on_screen', edit_instruction: 'Marcus leans under the hood while Moussa watches' },
+      { type: 'keyframe', text: 'Mot Flow.', character_name: 'Moussa', character_visibility: 'off_screen', scene_description: 'title card, centered text reading "Mot Flow"' },
+    ],
+  };
+  const e = buildImagePrompt(p2, 1, {});
+  assert.ok(e.includes('wearing grey hoodie'), 'edit keeps the scene outfit');
+  assert.ok(!e.includes('coral T-shirt'));
+  assert.ok(e.includes('Marcus looks exactly as established: tall sturdy man, trimmed goatee, wearing black beanie, reflective jacket'));
+  assert.ok(e.includes(STORY_FACTS_RULE) && !e.includes(EXACT_TEXT_RULE));
+  assert.ok(buildImagePrompt(p2, 2, {}).includes(EXACT_TEXT_RULE));
 });
 
 test('ChatGPT job: numbering, references, runs', () => {

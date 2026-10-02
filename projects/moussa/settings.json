@@ -1,0 +1,17 @@
+{
+  "aspectRatio": "9:16",
+  "style": "",
+  "model": "openai/gpt-5.6-sol",
+  "reasoningEffort": "medium",
+  "maxTokens": 32000,
+  "chunkWords": 400,
+  "imagesPerRun": 40,
+  "driveFolder": "",
+  "whisperEngine": "whisperx",
+  "language": "fr",
+  "fps": 30,
+  "motion": "kenburns",
+  "transition": "cut",
+  "transitionFrames": 4,
+  "leadSeconds": 0.08
+}

@@ -1,0 +1,383 @@
+{
+  "format": "ai-director-chatgpt-image-job/v1",
+  "project": "Moussa",
+  "total_images": 41,
+  "images_in_this_file": 41,
+  "aspect_ratio": "9:16",
+  "image_size": "1024x1536 (portrait)",
+  "google_drive_folder": "AI Director/Moussa",
+  "style_lock": {
+    "source": "attached style reference image",
+    "rule": "STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead.",
+    "informational_style_text": null
+  },
+  "schedule": {
+    "images_per_run": 40,
+    "total_runs": 2,
+    "runs": [
+      {
+        "run": 1,
+        "first": 1,
+        "last": 40,
+        "count": 40
+      },
+      {
+        "run": 2,
+        "first": 41,
+        "last": 41,
+        "count": 1
+      }
+    ]
+  },
+  "instructions_for_chatgpt": "You are my image production assistant. The attached JSON file is an image job for the video \"Moussa\". I have also attached my STYLE REFERENCE image.\n\nSTEP 0 — Read the whole JSON first, then reply with: total images (41), images per run (40), number of runs (2), and the first/last file_name of each run. Do not generate anything in that first reply.\n\nEVERY RUN (this is a scheduled task — do this each time it fires):\n1. Open the Google Drive folder \"AI Director/Moussa\" and list which file_name values from the JSON already exist there.\n2. Generate the next 40 MISSING images, strictly in ascending \"number\" order. Never skip a number.\n3. For each image, use its \"prompt\" exactly as written — do not shorten, summarise, or rewrite it.\n4. Every image is portrait 9:16 (1024x1536 (portrait)). No borders, captions, subtitles, watermarks, or text that the prompt does not ask for.\n5. If \"kind\" is \"continues_previous\": use the image named in \"reference_image\" (from this chat or from the Drive folder) as the continuity reference — same characters, faces, wardrobe, environment, props, and lighting — and change ONLY what the prompt asks, with the new camera framing it describes.\n6. If \"kind\" is \"new_scene\": compose a fresh frame (do not copy the previous composition), but keep every character's identity anchor (art style, build, face) identical.\n7. STYLE LOCK: the attached style reference image is the SOLE style authority and overrides every other style word. STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead.\n8. If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS.\n9. Save each image to \"AI Director/Moussa\" as a PNG named EXACTLY its \"file_name\" (e.g. shot_0001.png).\n10. If an image fails, retry it once; if it still fails, note it and continue with the next number.\n11. End each run with a short report: files saved this run, any failures, and the next file_name to make. When all images exist, say \"ALL IMAGES COMPLETE\".",
+  "characters": [
+    {
+      "name": "Moussa",
+      "identity_anchor": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, slim short sixteen-year-old boy with alert forward posture and quick, slightly restless movements, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow",
+      "default_palette": "coral T-shirt, navy knee-length shorts, mustard sneakers, and a faded blue crossbody satchel",
+      "always_carries": "faded blue crossbody satchel and a thin woven bracelet on his right wrist"
+    },
+    {
+      "name": "Monsieur Koné",
+      "identity_anchor": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, tall broad-shouldered middle-aged man with formal upright posture and deliberate economical gestures, long oval face, deep-set brown eyes, rectangular glasses, strong brows, and a neatly trimmed moustache",
+      "default_palette": "deep teal suit, cream shirt, burgundy tie, and polished dark brown shoes",
+      "always_carries": "rectangular glasses, silver wristwatch, and a school-director identification card"
+    },
+    {
+      "name": "Narrator",
+      "identity_anchor": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, unseen voice-only presence with no physical body shown in the story world, no visible face; personality conveyed through timing, typography, and graphic emphasis",
+      "default_palette": "warm cream, amber, deep blue, charcoal, and selective coral accents",
+      "always_carries": "Comic Sans MS instructional text and softly painted language diagrams"
+    }
+  ],
+  "images": [
+    {
+      "number": 1,
+      "file_name": "shot_0001.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "This story is brought to you by Mot Flow.",
+      "prompt": "ON-SCREEN IDEA — vertical 9:16 painted title card, flowing amber path crossing deep-blue texture, centered text reading \"Mot Flow\" in Comic Sans MS, painterly 3D animated illustration with textured brushwork — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 2,
+      "file_name": "shot_0002.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Today, we tell the story of a boy who finds a black bag at the market,",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, slim short sixteen-year-old boy with alert forward posture and quick, slightly restless movements, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow, coral T-shirt, navy knee-length shorts, mustard sneakers, and a faded blue crossbody satchel — PAINTERLY 3D ANIMATED ILLUSTRATION WITH TEXTURED BRUSHWORK, slim short sixteen-year-old boy with alert forward posture, rounded face, large dark almond eyes, short tight curls, notched left eyebrow — vertical 9:16 low-angle market composition, Moussa noticing a black bag between produce stalls, wearing coral T-shirt, navy shorts, mustard sneakers, faded blue satchel — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 3,
+      "file_name": "shot_0003.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0002.png",
+      "narration": "and the owner of that bag is the last person he wants to meet.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, large dark almond eyes tightening beneath short curls — hard cut to medium profile in vertical 9:16 — an imposing adult shadow stretches from the bag toward Moussa as his smile disappears — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 4,
+      "file_name": "shot_0004.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "By the end of this story, you should learn how to say what is inside something with il y a,",
+      "prompt": "ON-SCREEN IDEA — vertical 9:16 educational graphic of an open painted bag containing simple objects, centered text reading \"il y a = there is\" in Comic Sans MS, painterly 3D animated illustration with warm amber highlights — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 5,
+      "file_name": "shot_0005.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0004.png",
+      "narration": "how to say \"not\" with ne... pas,",
+      "prompt": "ON-SCREEN IDEA — hard cut to an angled vertical 9:16 grammar ribbon in painterly 3D animated illustration — Comic Sans MS text \"ne ... pas\" closes around a central verb like two brackets — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 6,
+      "file_name": "shot_0006.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0005.png",
+      "narration": "and everyday words like le marché, la clé and l'argent.",
+      "prompt": "ON-SCREEN IDEA — cut to overhead painted vocabulary tiles in vertical 9:16 — market stall, key, and coins appear together with Comic Sans MS labels \"le marché\", \"la clé\", and \"l'argent\" — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 7,
+      "file_name": "shot_0007.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Moussa a seize ans.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, slim short sixteen-year-old boy with alert forward posture and quick, slightly restless movements, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow, coral T-shirt, navy knee-length shorts, mustard sneakers, and a faded blue crossbody satchel — PAINTERLY 3D ANIMATED ILLUSTRATION WITH TEXTURED BRUSHWORK, slim short sixteen-year-old boy with alert forward posture, rounded face, large dark almond eyes, short tight curls, notched left eyebrow — vertical 9:16 medium portrait at the market entrance, wearing coral T-shirt, navy shorts, mustard sneakers, faded blue satchel — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 8,
+      "file_name": "shot_0008.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0007.png",
+      "narration": "Aujourd'hui, c'est lundi,",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — OBJECT DETAIL — hard cut to a high-angle vertical 9:16 insert of Moussa's phone calendar showing \"LUNDI\" in Comic Sans MS, painterly 3D animated illustration; his woven-bracelet hand lowers the screen — Keep any character incidental in the background; the stated primary subject owns the frame. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 9,
+      "file_name": "shot_0009.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0008.png",
+      "narration": "et Moussa est au marché.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, rounded face and large almond eyes — cut to wide vertical 9:16 establishing view from above the stalls — Moussa threads through shoppers beneath striped awnings — Keep any character incidental in the background; the stated primary subject owns the frame. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 10,
+      "file_name": "shot_0010.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Par terre, il y a un sac noir.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, slim short sixteen-year-old boy with alert forward posture and quick, slightly restless movements, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow, coral T-shirt, navy knee-length shorts, mustard sneakers, and a faded blue crossbody satchel — OBJECT DETAIL — vertical 9:16 ground-level close shot of a plain black zippered bag beside a vegetable crate, Moussa's mustard sneakers stopping behind it, painterly 3D animated illustration with textured sunlit brushwork — Keep any character incidental in the background; the stated primary subject owns the frame. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 11,
+      "file_name": "shot_0011.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0010.png",
+      "narration": "Il n'y a pas de nom sur le sac.",
+      "prompt": "OBJECT DETAIL — hard cut to extreme side insert of the black bag in vertical 9:16, painterly 3D animated illustration — Moussa's bracelet-wearing hand rotates the blank luggage tag, revealing no writing — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 12,
+      "file_name": "shot_0012.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0011.png",
+      "narration": "Moussa ouvre le sac.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, large almond eyes focused beneath short tight curls — cut to over-the-shoulder vertical 9:16 view — crouching Moussa pulls the zipper open while the bag remains grounded beside the crate — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 13,
+      "file_name": "shot_0013.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0012.png",
+      "narration": "Dans le sac, il y a un téléphone, une clé et beaucoup d'argent.",
+      "prompt": "OBJECT DETAIL — cut to direct overhead vertical 9:16 insert inside the opened bag, painterly 3D animated illustration — a smartphone, single silver key, and thick bundles of cash are clearly visible together — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 14,
+      "file_name": "shot_0014.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0013.png",
+      "narration": "Oh là là !",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, rounded face and huge dark almond eyes — push in to extreme close-up in vertical 9:16 — Moussa's eyebrows leap and mouth opens, heightened astonishment held — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 15,
+      "file_name": "shot_0015.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0014.png",
+      "narration": "Le sac n'est pas à lui.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, notched eyebrow pinched above uneasy almond eyes — hard cut to medium side profile in vertical 9:16 — Moussa withdraws both hands from the open bag — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 16,
+      "file_name": "shot_0016.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0015.png",
+      "narration": "Moussa regarde à gauche.",
+      "prompt": "ENVIRONMENT — cut to Moussa's leftward point-of-view down a narrow vertical 9:16 market aisle, painterly 3D animated illustration — swaying fabric and unattended produce stands reveal no approaching owner — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 17,
+      "file_name": "shot_0017.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0016.png",
+      "narration": "Il regarde à droite.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, short curls and rounded face seen from behind — hard cut to reverse over-the-shoulder vertical 9:16 angle — Moussa snaps right toward a sunlit row of departing shoppers — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 18,
+      "file_name": "shot_0018.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0017.png",
+      "narration": "Il n'y a personne.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — ENVIRONMENT — cut to high crane-like vertical 9:16 wide shot in painterly 3D animated illustration — Moussa and the open bag sit isolated in a temporary clearing between flowing market crowds — Keep any character incidental in the background; the stated primary subject owns the frame. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 19,
+      "file_name": "shot_0019.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Soudain, le téléphone sonne.",
+      "prompt": "OBJECT DETAIL — vertical 9:16 macro shot of the smartphone vibrating atop the cash inside the open black bag, painted sound ripples striking the zipper, painterly 3D animated illustration with sharp amber highlights — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 20,
+      "file_name": "shot_0020.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0019.png",
+      "narration": "Moussa répond.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, rounded face and wary almond eyes — cut to low medium vertical 9:16 angle — Moussa lifts the ringing phone to his ear while remaining beside the bag — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 21,
+      "file_name": "shot_0021.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "C'est un homme.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, tall broad-shouldered middle-aged man with formal upright posture and deliberate economical gestures, long oval face, deep-set brown eyes, rectangular glasses, strong brows, and a neatly trimmed moustache, deep teal suit, cream shirt, burgundy tie, and polished dark brown shoes — PAINTERLY 3D ANIMATED ILLUSTRATION WITH TEXTURED BRUSHWORK, tall broad-shouldered middle-aged man with formal upright posture, long oval face, deep-set brown eyes, rectangular glasses, strong brows, trimmed moustache — vertical 9:16 shadowed profile in a school office, phone at his ear, wearing deep teal suit, cream shirt, burgundy tie — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 22,
+      "file_name": "shot_0022.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0021.png",
+      "narration": "Il cherche son sac.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, long oval face, deep-set brown eyes, rectangular glasses, strong brows, and a neatly trimmed moustache — PAINTERLY 3D ANIMATED ILLUSTRATION, rectangular glasses above intent deep-set eyes — hard cut to desk-level three-quarter vertical 9:16 view — Monsieur Koné checks the empty space beside his chair and gestures while describing the missing bag — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 23,
+      "file_name": "shot_0023.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Moussa connaît cette voix.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, slim short sixteen-year-old boy with alert forward posture and quick, slightly restless movements, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow, coral T-shirt, navy knee-length shorts, mustard sneakers, and a faded blue crossbody satchel — PAINTERLY 3D ANIMATED ILLUSTRATION WITH TEXTURED BRUSHWORK, slim short sixteen-year-old boy with alert forward posture, rounded face, large dark almond eyes, short tight curls, notched left eyebrow — vertical 9:16 close reaction at the market, phone pressed to ear, wearing coral T-shirt, navy shorts, mustard sneakers, faded blue satchel — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 24,
+      "file_name": "shot_0024.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "C'est Monsieur Koné, le directeur de son école !",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, tall broad-shouldered middle-aged man with formal upright posture and deliberate economical gestures, long oval face, deep-set brown eyes, rectangular glasses, strong brows, and a neatly trimmed moustache, deep teal suit, cream shirt, burgundy tie, and polished dark brown shoes — PAINTERLY 3D ANIMATED ILLUSTRATION WITH TEXTURED BRUSHWORK, tall broad-shouldered middle-aged man with formal upright posture, long oval face, deep-set brown eyes, rectangular glasses, strong brows, trimmed moustache — vertical 9:16 frontal reveal in his school office beside a director plaque, wearing deep teal suit, cream shirt, burgundy tie — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 25,
+      "file_name": "shot_0025.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0024.png",
+      "narration": "Monsieur Koné est très content.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, long oval face, deep-set brown eyes, rectangular glasses, strong brows, and a neatly trimmed moustache — PAINTERLY 3D ANIMATED ILLUSTRATION, deep-set eyes warming behind rectangular glasses — cut to intimate three-quarter close-up in vertical 9:16 — Monsieur Koné smiles broadly and relaxes his shoulders upon hearing the bag is safe — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 26,
+      "file_name": "shot_0026.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Moussa est honnête.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, slim short sixteen-year-old boy with alert forward posture and quick, slightly restless movements, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow, coral T-shirt, navy knee-length shorts, mustard sneakers, and a faded blue crossbody satchel — PAINTERLY 3D ANIMATED ILLUSTRATION WITH TEXTURED BRUSHWORK, slim short sixteen-year-old boy with alert forward posture, rounded face, large dark almond eyes, short tight curls, notched left eyebrow — vertical 9:16 medium-wide market shot, Moussa closes the bag protectively while holding the phone, wearing coral T-shirt, navy shorts, mustard sneakers, faded blue satchel — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 27,
+      "file_name": "shot_0027.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0026.png",
+      "narration": "Mais il y a un problème.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, notched eyebrow lifting over suddenly anxious eyes — hard cut to low close-up in vertical 9:16 — Moussa's proud smile falters as the caller continues speaking — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 28,
+      "file_name": "shot_0028.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0027.png",
+      "narration": "Aujourd'hui, c'est lundi.",
+      "prompt": "OBJECT DETAIL — cut to tilted vertical 9:16 insert of the phone's call screen over a Monday calendar notification reading \"LUNDI\" in Comic Sans MS, painterly 3D animated illustration; Moussa's fingers tighten around it — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 29,
+      "file_name": "shot_0029.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Monsieur Koné demande pourquoi Moussa n'est pas à l'école.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, tall broad-shouldered middle-aged man with formal upright posture and deliberate economical gestures, long oval face, deep-set brown eyes, rectangular glasses, strong brows, and a neatly trimmed moustache, deep teal suit, cream shirt, burgundy tie, and polished dark brown shoes — PAINTERLY 3D ANIMATED ILLUSTRATION WITH TEXTURED BRUSHWORK, tall broad-shouldered middle-aged man with formal upright posture, long oval face, deep-set brown eyes, rectangular glasses, strong brows, trimmed moustache — vertical 9:16 over-desk shot with empty classroom visible through the office window, wearing deep teal suit, cream shirt, burgundy tie — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 30,
+      "file_name": "shot_0030.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Moussa ferme les yeux.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, slim short sixteen-year-old boy with alert forward posture and quick, slightly restless movements, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow, coral T-shirt, navy knee-length shorts, mustard sneakers, and a faded blue crossbody satchel — PAINTERLY 3D ANIMATED ILLUSTRATION WITH TEXTURED BRUSHWORK, slim short sixteen-year-old boy with alert forward posture, rounded face, large dark almond eyes now shut, short tight curls, notched left eyebrow — vertical 9:16 tight market close-up, phone at ear, wearing coral T-shirt, navy shorts, mustard sneakers, faded blue satchel — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 31,
+      "file_name": "shot_0031.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0030.png",
+      "narration": "Il dit qu'il est malade.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, rounded face and pinched notched eyebrow — hard cut to side-profile medium shot in vertical 9:16 — Moussa forces a weak cough into his fist while speaking into the phone — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 32,
+      "file_name": "shot_0032.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0031.png",
+      "narration": "Mais Moussa n'est pas malade.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, healthy bright almond eyes and rounded face — cut to energetic wide vertical 9:16 view — a vendor tosses Moussa an orange and he catches it reflexively, exposing perfect health — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 33,
+      "file_name": "shot_0033.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Poor Moussa.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, slim short sixteen-year-old boy with alert forward posture and quick, slightly restless movements, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow, coral T-shirt, navy knee-length shorts, mustard sneakers, and a faded blue crossbody satchel — PAINTERLY 3D ANIMATED ILLUSTRATION WITH TEXTURED BRUSHWORK, slim short sixteen-year-old boy with alert posture now shrinking, rounded face, large dark almond eyes, short tight curls, notched left eyebrow — vertical 9:16 freeze-frame close-up holding phone and orange, wearing coral T-shirt, navy shorts, mustard sneakers, faded blue satchel — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 34,
+      "file_name": "shot_0034.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0033.png",
+      "narration": "Honest with the bag,",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, earnest almond eyes beneath short tight curls — cut to high three-quarter vertical 9:16 view — Moussa places the secured black bag safely atop the vendor's counter — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 35,
+      "file_name": "shot_0035.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0034.png",
+      "narration": "not so honest about school.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, notched eyebrow twitching above guilty eyes — hard cut to low-angle medium vertical 9:16 shot — Moussa hides the healthy orange behind his back while fake-coughing into the phone — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 36,
+      "file_name": "shot_0036.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "Remember: il y a means \"there is\",",
+      "prompt": "ON-SCREEN IDEA — vertical 9:16 painterly educational card showing an open bag and one glowing phone, centered Comic Sans MS text reading \"il y a = there is\", textured brushwork and warm classroom colors — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 37,
+      "file_name": "shot_0037.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0036.png",
+      "narration": "and to say \"not\", you wrap ne... pas around the verb:",
+      "prompt": "ON-SCREEN IDEA — hard cut to diagonal vertical 9:16 grammar diagram in painterly 3D animated illustration — Comic Sans MS words \"ne\" and \"pas\" slide to opposite sides of a glowing verb — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 38,
+      "file_name": "shot_0038.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0037.png",
+      "narration": "Moussa n'est pas malade.",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, rounded face, large dark almond eyes, short tightly curled hair, and a small notch in his left eyebrow — PAINTERLY 3D ANIMATED ILLUSTRATION, healthy rounded face and wide dark almond eyes — cut to vertical 9:16 medium portrait of Moussa holding the orange, with Comic Sans MS sentence \"Moussa n'est pas malade\" aligned safely below him and \"n'\" plus \"pas\" highlighted — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 39,
+      "file_name": "shot_0039.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "What do you think Mr Koné says next?",
+      "prompt": "painterly 3D animated illustration with textured brushwork, expressive proportions, warm cinematic highlights, and rich cool shadows, tall broad-shouldered middle-aged man with formal upright posture and deliberate economical gestures, long oval face, deep-set brown eyes, rectangular glasses, strong brows, and a neatly trimmed moustache, deep teal suit, cream shirt, burgundy tie, and polished dark brown shoes — PAINTERLY 3D ANIMATED ILLUSTRATION WITH TEXTURED BRUSHWORK, tall broad-shouldered middle-aged man with formal upright posture, long oval face, deep-set brown eyes, rectangular glasses, strong brows, trimmed moustache — vertical 9:16 suspenseful office close-up, phone lowered slightly, wearing deep teal suit, cream shirt, burgundy tie — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    },
+    {
+      "number": 40,
+      "file_name": "shot_0040.png",
+      "kind": "continues_previous",
+      "reference_image": "shot_0039.png",
+      "narration": "Tell us in French in the comments.",
+      "prompt": "ON-SCREEN IDEA — hard cut to vertical 9:16 painted stack of blank speech bubbles and accent-mark symbols, painterly 3D animated illustration — centered Comic Sans MS prompt reads \"Répondez en français !\" — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS."
+    },
+    {
+      "number": 41,
+      "file_name": "shot_0041.png",
+      "kind": "new_scene",
+      "reference_image": null,
+      "narration": "See you in the next story.",
+      "prompt": "ON-SCREEN IDEA — vertical 9:16 painterly end card with the closed black bag resting beside a winding path toward a glowing market skyline, centered Comic Sans MS text reading \"À bientôt !\", textured warm highlights and deep-blue shadows — Keep the continuity character entirely off-screen. Frame the stated primary subject, not a person, unless this narration explicitly introduces someone else. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead."
+    }
+  ]
+}
