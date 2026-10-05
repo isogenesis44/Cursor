@@ -256,3 +256,10 @@ hand-drawn melancholy urban indie cartoon with watercolor-gouache washes, irregu
 
 CORRECTION: Remove the man in the black hoodie on the couch in the background; the room is empty behind her.
 ```
+
+## Round 2 (regenerated)
+
+All 15 must-fix shots were regenerated and checked: every correction is in place (corded phones, Jordan's student outfit,
+the buyer at his kitchen, scanner participant in a hoodie, the schoolteacher is a woman, the Nadine is the superyacht,
+Navy rescue of Belfort's party, Coleman with glasses, the ending woman). The 7 minor shots were kept as they were.
+Rendered and delivered to Drive: "How Greed Blindspots Work: The Wolf of Wall Street Scam Explained.mp4" (13m07s, 1080p, md5 44bf893d965d7ca40dd5a2aef8ed7288).
