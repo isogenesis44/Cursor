@@ -263,3 +263,74 @@ All 15 must-fix shots were regenerated and checked: every correction is in place
 the buyer at his kitchen, scanner participant in a hoodie, the schoolteacher is a woman, the Nadine is the superyacht,
 Navy rescue of Belfort's party, Coleman with glasses, the ending woman). The 7 minor shots were kept as they were.
 Rendered and delivered to Drive: "How Greed Blindspots Work: The Wolf of Wall Street Scam Explained.mp4" (13m07s, 1080p, md5 44bf893d965d7ca40dd5a2aef8ed7288).
+
+## Round 3 — anatomy re-check (missed in the first review)
+
+The user found a 3-handed image at 2:54 (shot 62). The first review used small 2x3 contact sheets and checked story/continuity,
+not anatomy. Every image was re-checked at a larger size (2x2 sheets) for hands, arms and duplicated objects.
+
+### shot_0062.png (at 2:51) — "traded far from the big exchanges,"
+
+**Problem:** Jordan has THREE hands: one holds the phone to his ear and two more gesture in front of him.
+
+```
+Create shot_0062.png (16:9 landscape, 1536x1024).
+hand-drawn melancholy indie cartoon with thin irregular ink lines, flat watercolor-gouache washes, muted earth colors, and visible paper grain, slender average-height build, forward-driving posture, restless controlled gestures, long oval face, heavy-lidded dark eyes, prominent nose, thick side-parted dark hair, wearing mustard sports coat, open-collar white shirt, dark slacks and worn brown loafers, quick counting fingers and a salesman’s direct gaze — Small brokerage process — hard cut to a deep corridor view of salesmen trading solely by telephone while a distant Manhattan skyline remains tiny beyond a grimy window; hand-drawn melancholy urban indie cartoon, thin irregular ink, muted watercolor-gouache, paper grain — Keep any character incidental in the background; the stated primary subject owns the frame. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STORY FACTS: anything readable or identifiable in the frame (phone and caller screens, signs, plaques, documents, banknotes, vehicles) must agree with this prompt and the story: show only the names, callers, places, currency, language and vehicles it states, never an invented substitute.
+
+CORRECTION: Jordan has exactly two hands: one holds the telephone receiver to his ear, the other rests on the desk. No extra hands or arms anywhere.
+```
+
+### shot_0085.png (at 4:00) — "and it worked."
+
+**Problem:** Jordan has THREE hands: one holds the phone and two more count/gesture in front of him.
+
+```
+Create shot_0085.png (16:9 landscape, 1536x1024).
+hand-drawn melancholy indie cartoon with thin irregular ink lines, flat watercolor-gouache washes, muted earth colors, and visible paper grain, slender average-height build, forward-driving posture, restless controlled gestures, long oval face, heavy-lidded dark eyes, prominent nose, thick side-parted dark hair, wearing navy chalk-stripe suit, white shirt, coral silk tie and polished burgundy shoes, quick counting fingers and a salesman’s direct gaze — Successful deception — reverse view from inside the false facade as multiple ordinary silhouettes enter and telephones illuminate across the sales floor; hand-drawn melancholy urban indie cartoon, thin irregular ink, muted gold-gray watercolor-gouache, paper grain — Keep any character incidental in the background; the stated primary subject owns the frame. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STORY FACTS: anything readable or identifiable in the frame (phone and caller screens, signs, plaques, documents, banknotes, vehicles) must agree with this prompt and the story: show only the names, callers, places, currency, language and vehicles it states, never an invented substitute.
+
+CORRECTION: Jordan has exactly two hands: one holds the telephone receiver, the other rests on the desk. No extra hands or arms anywhere.
+```
+
+### shot_0175.png (at 7:57) — "Nobody at Stratton said ""
+
+**Problem:** The front broker holds two telephone receivers at once (one at his ear, a second against his chin).
+
+```
+Create shot_0175.png (16:9 landscape, 1536x1024).
+hand-drawn melancholy indie cartoon with thin irregular ink lines, flat watercolor-gouache washes, muted earth colors, and visible paper grain, varied young adult builds, seated in repetitive forward-leaning rows, simplified long faces, tired eyes, period haircuts, tense smiling mouths, muted grey, navy, tan, and faded pastel officewear — GROUP — 16:9 lateral tracking-style composition across brokers speaking into phones, every mouth partly hidden by receivers and no speech text yet; melancholy urban indie cartoon, thin irregular charcoal ink, muted ochre-grey watercolor-gouache, subdued flat shading, paper grain — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — EXACT TEXT: spell every quoted on-screen word exactly as written in this prompt, letter for letter, including brand names, spacing, capitals and accents. Add no other words, taglines, slogans, logos, icons or labels. — STORY FACTS: anything readable or identifiable in the frame (phone and caller screens, signs, plaques, documents, banknotes, vehicles) must agree with this prompt and the story: show only the names, callers, places, currency, language and vehicles it states, never an invented substitute. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead.
+
+CORRECTION: Each broker holds exactly one telephone receiver with one hand; every person has exactly two hands and no duplicate receivers.
+```
+
+### shot_0140.png (at 6:18) — "and that activation came right before riskier choices,"
+
+**Problem:** The scanner participant and the hand pressing the button wear the researcher's white lab coat again (same outfit problem as #137/#141).
+
+```
+Create shot_0140.png (16:9 landscape, 1536x1024).
+hand-drawn melancholy urban indie cartoon, thin irregular ink outlines, muted watercolor-gouache washes, subtle paper grain, mixed adult body types, average height, cautious stillness inside laboratory equipment, varied ordinary faces with alert eyes and restrained nervous tension, wearing burgundy sweater beneath a pale grey laboratory coat and black trousers, scanner headphones and handheld decision buttons — HAND-DRAWN MELANCHOLY URBAN INDIE CARTOON, ordinary participant fingers and scanner controls — hard cut to 16:9 diagonal split composition: glowing brain scan on the left, a beat later the finger presses the visibly riskier of two unlabeled buttons on the right; muted watercolor-gouache, paper grain — Keep any character incidental in the background; the stated primary subject owns the frame. — Use the preceding frame as the continuity source: retain the same environment, props, lighting logic, and story state unless this narration changes them. Do not force a character into this view unless character_visibility is on_screen or background; preserve their identity when they are shown. The camera may hard-cut to a distinct, independently composed view of the same world. If continuing a writeup/title, preserve its alignment, safe-area position, scale, and baseline exactly. — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — EXACT TEXT: spell every quoted on-screen word exactly as written in this prompt, letter for letter, including brand names, spacing, capitals and accents. Add no other words, taglines, slogans, logos, icons or labels. — STORY FACTS: anything readable or identifiable in the frame (phone and caller screens, signs, plaques, documents, banknotes, vehicles) must agree with this prompt and the story: show only the names, callers, places, currency, language and vehicles it states, never an invented substitute.
+
+CORRECTION: The participant inside the scanner and the hand pressing the button wear a black hoodie (same person as shot_0136), not a lab coat.
+```
+
+### shot_0266.png (at 12:13) — "It worked on the man answering the phone in the Midwest."
+
+**Problem:** Two handsets: he holds one to his ear while the phone on the table still has its own handset on it.
+
+```
+Create shot_0266.png (16:9 landscape, 1536x1024).
+hand-drawn melancholy indie cartoon with thin irregular ink lines, flat watercolor-gouache washes, muted earth colors, and visible paper grain, average-height, sturdy middle-aged build, slightly stooped working posture, broad lined face, attentive oval eyes, thinning brown hair, neat moustache — for THIS scene only, wearing soft brown flannel shirt, faded blue jeans, white undershirt, and house slippers instead of the usual outfit — HAND-DRAWN MELANCHOLY URBAN INDIE CARTOON, established Midwestern Buyer identity with familiar build and face — intimate kitchen medium shot as he holds a corded telephone, hopeful attention fixed on the caller while unpaid household papers sit unnoticed behind his elbow; muted beige and winter-blue watercolor-gouache, irregular ink, paper grain — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STORY FACTS: anything readable or identifiable in the frame (phone and caller screens, signs, plaques, documents, banknotes, vehicles) must agree with this prompt and the story: show only the names, callers, places, currency, language and vehicles it states, never an invented substitute. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead.
+
+CORRECTION: There is only ONE telephone handset: the one at his ear, connected by its coiled cord to an empty beige phone base on the table.
+```
+
+### shot_0233.png (at 10:44) — "He served about twenty-two months."
+
+**Problem:** (minor) Jordan's right arm is too long; his hand hangs at knee height.
+
+```
+Create shot_0233.png (16:9 landscape, 1536x1024).
+hand-drawn melancholy indie cartoon with thin irregular ink lines, flat watercolor-gouache washes, muted earth colors, and visible paper grain, slender average-height build, forward-driving posture, restless controlled gestures, long oval face, heavy-lidded dark eyes, prominent nose, thick side-parted dark hair — for THIS scene only, wearing loose institutional khaki shirt and trousers with plain white undershirt instead of the usual outfit — HAND-DRAWN MELANCHOLY URBAN INDIE CARTOON, established Jordan Belfort identity with confident build and familiar sharp features — compressed telephoto corridor shot through repeated cell bars as seasons shift in pale light beyond one small window; institutional beige and faded blue watercolor-gouache, irregular ink, paper grain — If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS. — STORY FACTS: anything readable or identifiable in the frame (phone and caller screens, signs, plaques, documents, banknotes, vehicles) must agree with this prompt and the story: show only the names, callers, places, currency, language and vehicles it states, never an invented substitute. — STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead.
+
+CORRECTION: Natural human proportions: both arms normal length, hands at hip level.
+```
