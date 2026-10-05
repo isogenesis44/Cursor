@@ -334,3 +334,8 @@ hand-drawn melancholy indie cartoon with thin irregular ink lines, flat watercol
 
 CORRECTION: Natural human proportions: both arms normal length, hands at hip level.
 ```
+
+### Round 3 result
+All 6 regenerated shots checked at full size: two hands per person, one handset each, scanner participant in a hoodie,
+normal arm length. Re-rendered and delivered: md5 7034bb243b34069d693f0d806212f20d (13m07s, 1080p).
+The previous video was renamed in Drive to "OLD - How Greed Blindspots Work (before hand fixes).mp4" (not deleted).
