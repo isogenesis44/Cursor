@@ -1,0 +1,75 @@
+How does a whole country go broke without a war, without an earthquake, without a single bomb being dropped? In 1929, America had the same farms, the same factories and the same people it had the year before. Nobody stole the machines. Nobody burned the fields. And yet within three years, one in four workers had no job, thousands of banks had shut their doors, and families who used to own houses were sleeping in shacks made of cardboard.
+
+The answer sounds strange at first, so let's explain it the way you'd explain it to a five-year-old. The Great Depression was mostly a story about money and fear, and how each one can make the other one worse.
+
+Start with a lemonade stand.
+
+Say you and your friend open a lemonade stand. It does well. Kids line up every afternoon. Your friend says, "Let me buy a piece of your stand. I'll give you ten dollars for a share of the profits." That's basically what a stock is. A tiny piece of a business. If the lemonade stand makes more money, your piece is worth more. If it makes less, your piece is worth less.
+
+Now jump to the 1920s. The First World War is over and America is having a party. Factories that used to make weapons are making cars, radios, washing machines and vacuum cleaners. Henry Ford's moving assembly line has cut the time it takes to build a Model T from about twelve hours to around an hour and a half. Millions of homes now have a radio. Cities are filling with electric lights and new skyscrapers. Jazz is everywhere.
+
+And people start doing something new. They buy things they can't afford yet, a little each month. A radio on installment. A car on installment. That part sounds harmless. Then they start doing the same thing with stocks.
+
+Back to the lemonade stand. Imagine you want a piece of it, but you only have one dollar. A grown-up says, "No problem. Give me one dollar, I'll lend you nine, and you can buy a ten-dollar piece." That's called buying on margin. In the late 1920s, people could buy stocks by paying as little as ten percent of the price and borrowing the rest. As long as prices kept going up, it felt like magic. You put in one dollar, the piece goes up to fifteen, and you've made five dollars from a single dollar of your own.
+
+Between 1924 and 1929, the Dow Jones roughly quadrupled. And here's where psychology walks in the door. When everyone around you is getting rich, standing still feels like losing. Psychologists call it social proof. We look at what other people are doing to decide what's safe. There's a famous story, probably part legend, that the banker Joseph Kennedy sold his stocks after a shoeshine boy started giving him stock tips. The lesson he took from it was simple. When the shoeshine boy is in the market, everybody already is, and there's nobody left to buy.
+
+Some people did see it coming. On September 5, 1929, an economist named Roger Babson stood up at a business conference and said a crash was coming, and that it could be terrible. The market dipped that afternoon. Then people went right back to buying. When a crowd is happy, a single worried voice sounds like someone trying to ruin the party.
+
+Then came October.
+
+On Thursday, October 24, prices started falling hard. Big bankers stepped in to calm things down, and for a few days it looked like it had worked. Then on Monday, October 28, the market dropped about thirteen percent. On Tuesday, October 29, it dropped about twelve percent more, with more than sixteen million shares changing hands in a single day. That Tuesday became known as Black Tuesday.
+
+Now remember the borrowed nine dollars. When the price of your lemonade-stand piece falls, the grown-up who lent you money gets nervous. He calls you and says, "I want my nine dollars back, now." That's a margin call. But you don't have nine dollars. You only ever had one. So you have to sell your piece, fast, at whatever price someone will pay. And when thousands of people are forced to sell at the same time, prices fall even further, which triggers more margin calls, which forces more selling. It's like a row of dominoes where every falling domino knocks over two more.
+
+The crash on its own didn't cause the Great Depression. Plenty of countries have had stock crashes and recovered within a year or two. What turned a crash into a decade of misery was what happened next, and most of it happened inside people's heads.
+
+Let's talk about banks, because this is the scariest part, and it's easy to understand.
+
+When you put money in a bank, the bank doesn't keep it in a big box with your name on it. It lends most of it out to other people, to build houses and run businesses, and keeps a smaller amount on hand for when customers want cash. That works perfectly as long as everyone doesn't show up on the same day.
+
+Now imagine you hear a rumor that your bank is in trouble. Maybe it's true. Maybe it isn't. Either way, what's the smart thing for you to do? Run to the bank and get your money out before everyone else does. And what does everyone else do? The exact same thing. Suddenly there's a line around the block, the bank runs out of cash, and it closes. The rumor came true because people believed it.
+
+In 1948, the sociologist Robert Merton gave this a name. He called it a self-fulfilling prophecy, and the example he used to explain it was a bank run. A perfectly healthy bank can be destroyed by fear alone. In the early 1930s, thousands of American banks failed. And when a bank failed back then, there was no insurance. If your savings were in it, your savings were gone.
+
+Then the government made it worse. The Federal Reserve, which is supposed to act like the grown-up in charge of the country's money, mostly stood back while the banks fell. The amount of money moving around the economy shrank by about a third. Decades later, in 2002, a Federal Reserve official named Ben Bernanke said it plainly at a celebration for the economist Milton Friedman, who had spent years studying this mistake. Speaking about the Depression, he said, "You're right, we did it. We're very sorry."
+
+Now here's the trap that kept everyone stuck, and it's my favorite one to explain, because it feels so unfair.
+
+Imagine you're scared. You might lose your job. So you stop buying new shoes and you save every penny. That's smart. For you. But the shoe store owner just lost a customer. So he stops buying new stock from the shoe factory. The factory lets some workers go. Those workers stop buying things too. And now more people are scared, so they save even harder.
+
+The economist John Maynard Keynes described something close to this. It's sometimes called the paradox of thrift. When one family saves, it's wise. When the whole country saves at once out of fear, nobody buys anything, businesses close, and everybody ends up poorer, including the savers. Every single person did the sensible thing, and together they made a disaster.
+
+Prices dropped. Factories closed. Car production in America fell by roughly three quarters between 1929 and 1932. The stock market kept sliding for almost three years. By the summer of 1932, the Dow had lost about eighty-nine percent of its value from the peak. A share that used to be worth a hundred dollars was worth around eleven.
+
+Other countries got pulled in too. American banks called back loans they had made overseas. Then in 1930, the United States passed the Smoot-Hawley Tariff, which raised taxes on goods coming in from other countries. Other countries answered with taxes of their own. Think of kids on a playground who stop sharing toys with each other because they're angry, and then nobody gets to play. Between 1929 and the early 1930s, world trade shrank by more than half.
+
+By 1933, about a quarter of American workers had no job. Breadlines stretched down city streets. People built neighborhoods of shacks out of scrap metal and cardboard, and they named them Hoovervilles after President Herbert Hoover. A newspaper used as a blanket became a Hoover blanket. Empty pockets pulled inside out became Hoover flags.
+
+And then, out in the middle of the country, the sky turned dark.
+
+Farmers on the Great Plains had plowed up enormous stretches of grassland to grow wheat. The grass roots used to hold the soil in place. When a long drought arrived in the 1930s, there was nothing left to hold it. The wind picked the dry dirt up and carried it in clouds so thick they blocked out the sun. People called them black blizzards. On April 14, 1935, a storm so big hit the region that it became known as Black Sunday. Families stuffed wet rags under their doors and still woke up with dust in their mouths. Over the decade, a few million people left the Plains states, many of them heading west to California looking for work.
+
+In the summer of 1932, thousands of World War One veterans and their families came to Washington, D.C. They had been promised bonus payments for their service, but the money wasn't due until 1945. They needed it now. They camped near the Capitol and waited. In late July, the army was ordered to clear them out. Soldiers used tear gas, and the camps were set on fire. Americans saw pictures of their own government chasing away the men who had fought for it, and something broke in how people saw their leaders.
+
+So how did America start climbing out?
+
+In March 1933, Franklin Roosevelt took office. In his first speech as president, he said a sentence that people still quote today. "The only thing we have to fear is fear itself."
+
+That line wasn't just poetry. It was a diagnosis. If the bank runs were caused by fear, then the first job was to fix the fear.
+
+Two days after taking office, Roosevelt closed every bank in the country for a few days. It was called a bank holiday. While they were closed, the government checked them. Then on March 12, he went on the radio and spoke directly to families in their living rooms. He explained, in simple words, how banks worked and why it was safe to put money back in. These became known as fireside chats.
+
+And when the banks reopened, something remarkable happened. People lined up again. But this time, they were lining up to put money in.
+
+Then Roosevelt changed the rules so the fear would have less to grab onto. The FDIC, created in 1933, insured people's bank deposits, so even if a bank failed, your savings were protected. Suddenly, there was no reason to run. The SEC, created in 1934, put rules on Wall Street. Social Security, passed in 1935, gave older Americans a small, steady income. Programs like the Civilian Conservation Corps and the Works Progress Administration gave millions of people paid work, planting forests and building roads, bridges, schools and dams.
+
+The recovery wasn't quick or smooth. The economy grew for several years, then slipped back into another downturn in 1937 and 1938. Unemployment stayed painfully high until the end of the decade, when factories filled up again building ships and planes as the world headed into another war.
+
+So if you had to explain the whole thing to a five-year-old in one breath, it might sound like this.
+
+People borrowed lots of money to buy pieces of businesses, because everyone else was doing it. The prices fell. The lenders wanted their money back, so people had to sell, and prices fell more. People got scared their banks would close, so they ran to take their money out, and that's what made the banks close. Everyone got scared and stopped spending, so stores closed and people lost their jobs. And the way out started with a calm voice on the radio telling people it was safe to stop being afraid, along with new rules that made it true.
+
+The machines never broke. The farms didn't vanish. The people didn't forget how to work. What broke was trust. And once trust breaks, a whole country can talk itself into ruin, one sensible scared decision at a time.
+
+What do you think is the closest thing to a bank run happening in your own life right now? A rumor at work, a panic in a group chat, a crowd rushing to buy something because everyone else is? Tell me in the comments. And subscribe for more history explained through the psychology of the people who lived it.
