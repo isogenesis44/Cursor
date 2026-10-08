@@ -23,7 +23,11 @@ The narration audio comes later, either in the Drive image folder or attached in
    (`*-batch-N.zip`, `*-batch-N-updated.zip`); for each shot always use the NEWEST version. Check: all shots present, no byte-identical
    duplicates (`md5sum`; ChatGPT has repeated and shifted a whole batch before), then look at every image in 2x3 contact sheets
    (Pillow) against its narration line and planned scene from `shot-plan.json`: right scene/speaker, recurring characters and the
-   car stay consistent, numbers/text correct, no AI glitches or style-image leftovers. Write `projects/<slug>/review.md` with
+   car stay consistent, numbers/text correct, no AI glitches or style-image leftovers.
+   **Then do a separate anatomy pass on bigger images (2x2 sheets, ~1000px per image)**: small 2x3 thumbnails hide these, and a
+   3-handed Jordan (Greed Blindspots #62, #85) slipped through. For every person count hands and arms (exactly two each, normal
+   length, attached to the body), check fingers, faces and legs, and look for duplicated objects (two phone receivers held at
+   once, a handset at the ear while the base still has one). Write `projects/<slug>/review.md` with
    what's wrong per shot and a ready-to-paste ChatGPT prompt (original prompt + CORRECTION), send it with a grid of the flagged
    images, and wait: the user regenerates or says ignore. Good images in the wrong slots can be re-mapped instead of regenerated;
    save the mapping in `projects/<slug>/`. Only delete old files in Drive if the user asks.

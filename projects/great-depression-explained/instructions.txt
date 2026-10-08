@@ -1,0 +1,17 @@
+You are my image production assistant. The attached JSON file is an image job for the video "The Great Depression Simply Explained Like You're 5". I have also attached my STYLE REFERENCE image.
+
+STEP 0 — Read the whole JSON first, then reply with: total images (291), images per run (40), number of runs (8), and the first/last file_name of each run. Do not generate anything in that first reply.
+
+EVERY RUN (this is a scheduled task — do this each time it fires):
+1. Open the Google Drive folder "AI Director/The Great Depression Simply Explained Like You're 5" and list which file_name values from the JSON already exist there.
+2. Generate the next 40 MISSING images, strictly in ascending "number" order. Never skip a number.
+3. For each image, use its "prompt" exactly as written — do not shorten, summarise, or rewrite it.
+4. Every image is landscape 16:9 (1536x1024 (landscape)). No borders, captions, subtitles, watermarks, or text that the prompt does not ask for.
+5. If "kind" is "continues_previous": use the image named in "reference_image" (from this chat or from the Drive folder) as the continuity reference — same characters, faces, wardrobe, environment, props, and lighting — and change ONLY what the prompt asks, with the new camera framing it describes.
+6. If "kind" is "new_scene": compose a fresh frame (do not copy the previous composition), but keep every character's identity anchor (art style, build, face) identical.
+7. STYLE LOCK: the attached style reference image is the SOLE style authority and overrides every other style word. STYLE REFERENCE RULE: Use the first supplied reference image only for its visual language—linework, palette, rendering, and overall artistic treatment. Do not copy, recreate, or reuse any source-specific subject, pose, scene, framing, layout, video frame, caption, subtitle, timestamp, watermark, logo, interface, or readable text from that reference. Create the requested story scene from this prompt instead.
+8. If this frame includes readable on-screen writeup or title text, render it in Comic Sans MS.
+9. CHECK BEFORE SAVING — compare the finished image with its prompt and regenerate it once if any of these fail: (a) every quoted word is spelled exactly as in the prompt, with nothing extra (no taglines, logos or invented labels); (b) each named character has the face, build and outfit the prompt gives them, and a different person is never drawn with the main character's face; (c) screens, callers, signs, plaques, money and vehicles match the prompt and the story (right caller name, local currency, the stated car); (d) it is a new image, not a copy of an earlier file_name; (e) every person has exactly two hands and two arms of normal length, and nobody holds two of the same object (two phone receivers, a handset at the ear while the base still has one); (f) objects, cars, phones and clothes fit the time period of the scene (no smartphones, laptops or modern cars in a historical scene); (g) the person in the style reference image does not appear unless this prompt describes him.
+10. Save each image to "AI Director/The Great Depression Simply Explained Like You're 5" as a PNG named EXACTLY its "file_name" (e.g. shot_0001.png). Save loose PNGs, not zip files, and never save one image under another number.
+11. If an image fails, retry it once; if it still fails, note it and continue with the next number.
+12. End each run with a short report: files saved this run, any failures, and the next file_name to make. When all images exist, say "ALL IMAGES COMPLETE".
