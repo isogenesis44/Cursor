@@ -646,3 +646,8 @@ hand-drawn 2D watercolor animation with muted washes, flat shading, and imperfec
 
 CORRECTION: 1930s wood-and-brass teller cages, no glass booths. Keep everything else the same. Nothing modern: this is America in the 1920s-30s. Do not draw the young man in the black hoodie from the style reference.
 ```
+
+## Round 2 result
+All 57 flagged shots (30 must-fix, 27 minor) were regenerated and checked at full size against their corrections; every one is fixed.
+No other shot changed. Rendered and delivered to Drive: "The Great Depression Simply Explained Like You're 5.mp4"
+(17m35s, 1080p, md5 46b5ff10f6fd98162890e133d52af297).
