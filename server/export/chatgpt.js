@@ -1,5 +1,5 @@
 // Builds the "image job" JSON you paste/attach into ChatGPT (Pro) and schedule as a recurring task.
-import { buildImagePrompt, STYLE_REFERENCE_RULE, COMIC_SANS_RULE } from '../director/imagePrompts.js';
+import { buildImagePrompt, periodFor, STYLE_REFERENCE_RULE, COMIC_SANS_RULE } from '../director/imagePrompts.js';
 
 export const ASPECTS = {
   '16:9': { label: 'landscape 16:9', chatgptSize: '1536x1024 (landscape)', video: [1920, 1080] },
@@ -53,7 +53,7 @@ export function kickoffMessage(project, runs) {
       ? `7. STYLE LOCK: the attached style reference image is the SOLE style authority and overrides every other style word. ${STYLE_REFERENCE_RULE}`
       : `7. STYLE LOCK: every image uses this style, which overrides anything else: ${s.style || '(see style_lock in the JSON)'}.`,
     `8. ${COMIC_SANS_RULE}`,
-    '9. CHECK BEFORE SAVING — compare the finished image with its prompt and regenerate it once if any of these fail: (a) every quoted word is spelled exactly as in the prompt, with nothing extra (no taglines, logos or invented labels); (b) each named character has the face, build and outfit the prompt gives them, and a different person is never drawn with the main character\'s face; (c) screens, callers, signs, plaques, money and vehicles match the prompt and the story (right caller name, local currency, the stated car); (d) it is a new image, not a copy of an earlier file_name; (e) every person has exactly two hands and two arms of normal length, and nobody holds two of the same object (two phone receivers, a handset at the ear while the base still has one); (f) objects, cars, phones and clothes fit the time period of the scene (no smartphones, laptops or modern cars in a historical scene); (g) the person in the style reference image does not appear unless this prompt describes him.',
+    '9. CHECK BEFORE SAVING — compare the finished image with its prompt and regenerate it once if any of these fail: (a) every quoted word is spelled exactly as in the prompt, with nothing extra (no taglines, logos or invented labels); (b) each named character has the face, build and outfit the prompt gives them, and a different person is never drawn with the main character\'s face; (c) screens, callers, signs, plaques, money and vehicles match the prompt and the story (right caller name, local currency, the stated car); (d) it is a new image, not a copy of an earlier file_name; (e) every person has exactly two hands and two arms of normal length, and nobody holds two of the same object (two phone receivers, a handset at the ear while the base still has one); (f) objects, cars, phones, money and clothes fit the image\'s "period" field and the PERIOD AND PLACE line in its prompt (no smartphones, laptops or modern cars in a historical scene), and a real person named in the prompt has their real likeness at the stated age; (g) the person in the style reference image does not appear unless this prompt describes him.',
     `10. Save each image to "${folder}" as a PNG named EXACTLY its "file_name" (e.g. shot_0001.png). Save loose PNGs, not zip files, and never save one image under another number.`,
     '11. If an image fails, retry it once; if it still fails, note it and continue with the next number.',
     '12. End each run with a short report: files saved this run, any failures, and the next file_name to make. When all images exist, say "ALL IMAGES COMPLETE".',
@@ -79,6 +79,7 @@ export function buildChatGptJob(project, { run = null } = {}) {
       kind: shot.type === 'edit' ? 'continues_previous' : 'new_scene',
       reference_image: shot.type === 'edit' && i > 0 ? fileNameFor(i) : null,
       narration: shot.text,
+      period: periodFor(plan, i),
       prompt: buildImagePrompt(plan, i, { styleReference: hasRef, style: s.style, appendStyle: true }),
     });
   }

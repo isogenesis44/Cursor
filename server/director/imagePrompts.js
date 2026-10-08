@@ -22,6 +22,13 @@ export const EXACT_TEXT_RULE =
 export const STORY_FACTS_RULE =
   'STORY FACTS: anything readable or identifiable in the frame (phone and caller screens, signs, plaques, documents, banknotes, vehicles) must agree with this prompt and the story: show only the names, callers, places, currency, language and vehicles it states, never an invented substitute.';
 
+export const STYLE_PERSON_RULE =
+  'Do not draw the person shown in the style reference image, or anyone with their face, hair or clothes, unless this prompt describes exactly that person.';
+
+/** Period lock for one shot: everything that dates a picture must fit the scene's time and place. */
+export const periodRule = (period) =>
+  `PERIOD AND PLACE: ${period}. Every building, vehicle, phone, screen, machine, banknote and coin, sign, uniform, piece of clothing and hairstyle must exist in that time and place; nothing from a later period (no smartphones, computers, modern cars, plastic goods, hoodies, sneakers, baseball caps or backpacks unless that time had them).`;
+
 export const RETRY_WIDER =
   'Framing requirement for this next shot: pull the camera back to a clearly wider composition (zoom out). Show noticeably more of the surrounding setting while keeping the same subjects and the story change requested above.';
 
@@ -64,10 +71,24 @@ export function otherCharactersIn(plan, index) {
   });
 }
 
+/** The period and place in force for a shot: its own, else the nearest earlier shot that states one. */
+export function periodFor(plan, index) {
+  for (let i = index; i >= 0; i--) {
+    const p = plan.shots[i]?.setting_period;
+    if (p) return p;
+  }
+  return null;
+}
+
+const likeness = (c) => (c?.real_person ? `${c.name} is the real ${c.real_person}: draw their real, recognizable likeness at that age, not a generic face` : '');
+
 const castLine = (plan, index, c) => {
   const vp = c.visual_persona;
   const outfit = outfitFor(plan, index, c);
-  return `${c.name} looks exactly as established: ${join([vp.physical_description, vp.facial_features])}${outfit ? `, wearing ${outfit}` : ''}${vp.distinctive_elements ? `, with ${vp.distinctive_elements}` : ''}`;
+  return join([
+    `${c.name} looks exactly as established: ${join([vp.physical_description, vp.facial_features])}${outfit ? `, wearing ${outfit}` : ''}${vp.distinctive_elements ? `, with ${vp.distinctive_elements}` : ''}`,
+    likeness(c),
+  ], '; ');
 };
 
 /**
@@ -103,7 +124,10 @@ export function buildImagePrompt(plan, index, options = {}) {
     parts.push(shot.edit_instruction || shot.text);
   }
 
+  if (ch && visible && ch.real_person) parts.push(likeness(ch));
   for (const other of otherCharactersIn(plan, index)) parts.push(castLine(plan, index, other));
+  const period = periodFor(plan, index);
+  if (period) parts.push(periodRule(period));
 
   if (shot.character_visibility === 'off_screen' && shot.character_name) parts.push(OFF_SCREEN_RULE);
   if (shot.character_visibility === 'background') parts.push(BACKGROUND_RULE);
@@ -114,6 +138,7 @@ export function buildImagePrompt(plan, index, options = {}) {
   if (/["“”«»]|reading|reads|labell?ed|text/i.test(body)) parts.push(EXACT_TEXT_RULE);
   parts.push(STORY_FACTS_RULE);
   if (options.styleReference && shot.type === 'keyframe' && options.includeStyleRule !== false) parts.push(STYLE_REFERENCE_RULE);
+  if (options.styleReference) parts.push(STYLE_PERSON_RULE);
 
   return join(parts, ' — ');
 }

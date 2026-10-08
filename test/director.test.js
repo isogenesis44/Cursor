@@ -149,3 +149,39 @@ test('shot numbers from filenames', () => {
   assert.equal(shotNumberFromName('image 5.webp'), 5);
   assert.equal(shotNumberFromName('ChatGPT Image Sep 26, 2026, 08_15_32 AM.png'), null);
 });
+
+test('every image prompt carries the scene period, real-person likeness and the style-person rule', () => {
+  const plan = {
+    characters: [
+      { name: 'Roosevelt', real_person: 'Franklin D. Roosevelt, 32nd US president, as he looked in 1933 at age 51',
+        visual_persona: { art_style: 'watercolor', physical_description: 'broad-shouldered', facial_features: 'broad jaw, pince-nez', color_palette: 'dark suit' } },
+      { name: 'Teller', real_person: null,
+        visual_persona: { art_style: 'watercolor', physical_description: 'thin', facial_features: 'moustache', color_palette: 'waistcoat' } },
+    ],
+    shots: [
+      normalizeShot({ text: 'In March 1933,', type: 'keyframe', character_name: 'Roosevelt', scene_description: 'inauguration lectern', setting_period: 'Washington, D.C., USA, March 1933' }),
+      normalizeShot({ text: 'he spoke.', type: 'edit', character_name: 'Roosevelt', edit_instruction: 'close-up as the Teller listens', base_shot_index: 0 }),
+      normalizeShot({ text: 'Banks closed.', type: 'keyframe', character_name: 'Teller', character_visibility: 'off_screen', scene_description: 'chained bank doors' }),
+    ],
+  };
+  const first = buildImagePrompt(plan, 0, { styleReference: true });
+  assert.match(first, /PERIOD AND PLACE: Washington, D\.C\., USA, March 1933\./);
+  assert.match(first, /the real Franklin D\. Roosevelt.*recognizable likeness/);
+  assert.match(first, /Do not draw the person shown in the style reference image/);
+  // Edits and later keyframes without their own period inherit the last one stated.
+  const edit = buildImagePrompt(plan, 1, { styleReference: true });
+  assert.match(edit, /PERIOD AND PLACE: Washington, D\.C\., USA, March 1933/);
+  assert.match(edit, /Do not draw the person shown in the style reference image/);
+  assert.match(buildImagePrompt(plan, 2), /PERIOD AND PLACE: Washington/);
+  // Invented characters get no likeness line; no style-person rule without a reference image.
+  assert.doesNotMatch(buildImagePrompt(plan, 2), /the real|style reference image/);
+  const job = buildChatGptJob({ title: 't', plan, settings: { imagesPerRun: 40, aspectRatio: '16:9' }, styleImage: 'x.png' });
+  assert.equal(job.images[1].period, 'Washington, D.C., USA, March 1933');
+});
+
+test('planning prompt asks for setting_period and real_person', () => {
+  const p = buildPlanningPrompt({ script: 'x', aspectRatio: '16:9', style: '', hasReference: false });
+  assert.match(p, /PERIOD AND PLACE — REQUIRED ON EVERY KEYFRAME/);
+  assert.match(p, /"setting_period"/);
+  assert.match(p, /"real_person"/);
+});

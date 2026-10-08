@@ -18,6 +18,7 @@ The narration audio comes later, either in the Drive image folder or attached in
 3. **Save the plan to the repo right away** (the container is wiped when idle): write
    `projects/<slug>/shot-plan.json` (from `/export/plan.json`), `projects/<slug>/settings.json`, and the style image, then commit and push.
    A later session restores it with `POST /api/projects/:id/plan/import` (after PATCHing the script).
+   Before sending the job, spot-check the plan: every keyframe should have a `setting_period` (place + year/decade) and every real named person a `real_person` likeness note; if the planner left them out for a historical script, re-plan or PATCH the shots (`/api/projects/:id/shots/:n`).
 4. Send the user the ChatGPT job JSON (`/export/chatgpt.json`) and instructions (`/export/instructions.txt`) with SendUserFile.
 5. **Review the images before using them** (the user asked for this step). Images may arrive as loose `shot_####.png` or as zips
    (`*-batch-N.zip`, `*-batch-N-updated.zip`); for each shot always use the NEWEST version. Check: all shots present, no byte-identical

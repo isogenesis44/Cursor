@@ -71,6 +71,8 @@ function precedingSummary(chunkText, shots) {
     lines.push(`Current scene keyframe: ${lastKey.scene_description}`);
     if (lastKey.wardrobe_override) lines.push(`Current wardrobe: ${lastKey.wardrobe_override}`);
   }
+  const period = [...shots].reverse().find((s) => s.setting_period)?.setting_period;
+  if (period) lines.push(`Current period and place: ${period}`);
   if (last && last !== lastKey && last.edit_instruction) lines.push(`Last visual state (edit): ${last.edit_instruction}`);
   if (last) lines.push(`Last shot: character=${last.character_name || 'none'}, visibility=${last.character_visibility}, subject=${last.subject_focus}`);
   return lines.join('\n');
@@ -182,6 +184,7 @@ async function repairWeakShots(plan, chunks, chunkOf, settings, warnings, log) {
           const reps = r.shots.map((x) => ({ ...normalizeShot(x), subject_focus: orig.subject_focus, character_visibility: orig.character_visibility, duration_hint_seconds: orig.duration_hint_seconds }));
           reps[0].type = orig.type;
           if (orig.type === 'keyframe') reps[0].wardrobe_override = orig.wardrobe_override;
+          if (!reps[0].setting_period) reps[0].setting_period = orig.setting_period;
           for (let k = 1; k < reps.length; k++) reps[k].type = 'edit';
           enforceStructure(reps, { allowLeadingEdit: orig.type === 'edit' });
           const { shots: checked } = reconcileCoverage(orig.text, reps);

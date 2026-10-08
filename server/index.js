@@ -180,7 +180,7 @@ app.patch('/api/projects/:id/shots/:n', wrap(async (req, res) => {
   const i = Number(req.params.n) - 1;
   const shot = p.plan?.shots?.[i];
   if (!shot) throw Object.assign(new Error('No such shot'), { status: 404 });
-  const editable = ['scene_description', 'edit_instruction', 'wardrobe_override', 'character_visibility', 'subject_focus', 'prompt_override'];
+  const editable = ['scene_description', 'edit_instruction', 'wardrobe_override', 'character_visibility', 'subject_focus', 'setting_period', 'prompt_override'];
   for (const k of editable) if (k in req.body) shot[k] = req.body[k] === '' ? null : req.body[k];
   await save(p);
   res.json(view(p));

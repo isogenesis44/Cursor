@@ -41,6 +41,7 @@ export function normalizeCharacter(c) {
       distinctive_elements: str(vp.distinctive_elements) || '',
       expression_type: str(vp.expression_type) || '',
     },
+    real_person: str(c?.real_person),
   };
 }
 
@@ -57,6 +58,7 @@ export function normalizeShot(raw) {
     subject_focus: pickEnum(raw?.subject_focus, SUBJECT_FOCUS, 'character'),
     character_visibility: pickEnum(raw?.character_visibility, VISIBILITY, 'on_screen'),
     wardrobe_override: type === 'keyframe' ? str(raw?.wardrobe_override) : null,
+    setting_period: str(raw?.setting_period),
     expression: str(raw?.expression) || '',
     pose: str(raw?.pose) || '',
     action: str(raw?.action) || '',
